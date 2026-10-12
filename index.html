@@ -4905,10 +4905,14 @@
 
     // Precio
 
-    document.getElementById(
-        "modal-price"
-    ).innerText =
-        "$" + product.price;
+    
+    const modalPrice = document.getElementById("modal-price");
+
+    modalPrice.innerHTML = product.originalPrice
+        ? `<span class="original-price">$${product.originalPrice.toLocaleString("es-AR")}</span>
+        <span class="current-price">$${product.price.toLocaleString("es-AR")}</span>`
+        : `$${product.price.toLocaleString("es-AR")}`;
+
 
 
     // Descripción
