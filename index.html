@@ -1219,6 +1219,21 @@
             z-index: 5000 !important;
         }
 
+
+        .original-price {
+            color: #dc2626;
+            text-decoration: line-through;
+            font-size: 0.9rem;
+            margin-right: 8px;
+        }
+
+        .current-price {
+            color: #fadc1c;
+            font-weight: bold;
+            font-size: 1.1rem;
+        }
+
+
         </style>
 
 </head>
@@ -4616,6 +4631,7 @@
             id: 336,
             name: "PREVENTA COMBO HALLOWEEN",
             price: 20000,
+            originalPrice: 30000,
             images: [
                 "halloween/preventa1.webp",
                 "halloween/preventa2.webp",
@@ -4745,9 +4761,21 @@
                         ${product.name}
                     </h3>
 
-                    <div class="price">
+                   
+                <div class="price">
+                    ${
+                        product.originalPrice
+                        ? `<span class="original-price">
+                            $${product.originalPrice.toLocaleString("es-AR")}
+                        </span>`
+                        : ""
+                    }
+
+                    <span class="current-price">
                         $${product.price.toLocaleString("es-AR")}
-                    </div>
+                    </span>
+                </div>
+
 
                 </div>
 
