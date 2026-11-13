@@ -1,0 +1,5866 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+
+        <script src="https://kit.fontawesome.com/76444b214e.js" crossorigin="anonymous"></script>
+        
+        <meta charset="UTF-8">
+        
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+        <title>QCOSA3D - Catálogo</title>
+
+        <link rel="icon" type="image/png" href="logo.png">
+
+
+    <style>
+
+
+        /* =====================================================
+           CONFIGURACIÓN GENERAL
+        ===================================================== */
+
+        * {
+            box-sizing: border-box;
+            font-family: Verdana, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+
+      body {
+    min-height: 100vh;
+    margin: 0;
+    padding: 20px;
+
+    background: linear-gradient(
+        to bottom,
+        #1196ee 0%,
+        #64c7f5 50%,
+        #bfe5ff 100%
+    );
+
+    background-attachment: fixed;
+
+    color: #000000;
+}
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+
+        /* =====================================================
+           LOGO
+        ===================================================== */
+
+        .logo {
+            width: 250px;
+            height: auto;
+            display: block;
+            margin: 0 auto 10px auto;
+        }
+
+
+        /* =====================================================
+           ENCABEZADO
+        ===================================================== */
+
+        header {
+            text-align: center;
+            margin-bottom: 25px;
+        }
+
+        header p {
+            color: #ffffff;
+            font-size: 1.1rem;
+            font-weight: bold;
+            margin-top: 10px;
+            letter-spacing: 0.20px;
+
+            background: #0354eacc;
+            padding: 10px 18px;
+            border-radius: 12px;
+        }
+
+
+        /* =====================================================
+           BUSCADOR
+        ===================================================== */
+
+        .search-box {
+            width: 100%;
+            margin-bottom: 15px;
+
+            display: flex;
+            align-items: center;
+
+            background: white;
+            border: 3px solid #0354eacc;
+            border-radius: 10px;
+
+            padding: 0 15px;
+        }
+
+        .search-box i {
+            font-size: 18px;
+            color: #555;
+
+            margin-right: 12px;
+            flex-shrink: 0;
+        }
+
+        .search-box input {
+            width: 100%;
+
+            padding: 14px 0;
+
+            border: none;
+            outline: none;
+
+            background: transparent;
+
+            font-size: 1rem;
+        }
+
+        .search-box:focus-within {
+            border-color: #25d366;
+        }
+
+
+        /* =====================================================
+           CATEGORÍAS
+        ===================================================== */
+
+        .category-btn {
+            background: white;
+            color: #333;
+            border: 1px solid #ddd;
+            padding: 9px 15px;
+            border-radius: 20px;
+            cursor: pointer;
+            font-weight: bold;
+        }
+
+        .category-btn:hover {
+            background: #eee;
+        }
+
+        .category-btn.active {
+            background: #ff5e00;
+            color: white;
+            border-color: #ff5e00;
+        }
+
+
+        /* =====================================================
+           DISTRIBUCIÓN CATÁLOGO + CARRITO
+        ===================================================== */
+
+        .catalog-layout {
+            display: grid;
+            grid-template-columns: 1fr 330px;
+            gap: 25px;
+            align-items: start;
+        }
+
+        .products-section {
+            min-width: 0;
+        }
+
+
+        /* =====================================================
+           PRODUCTOS
+        ===================================================== */
+
+        .grid {
+            display: grid;
+            grid-template-columns:
+                repeat(auto-fit, minmax(220px, 1fr));
+
+            gap: 20px;
+        }
+
+        .card {
+            background: white;
+            border-radius: 12px;
+            border: 3px solid #0354eacc;
+            padding: 16px;
+
+            box-shadow:
+                0 4px 6px rgba(0,0,0,0.05);
+
+            text-align: center;
+
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+
+            cursor: pointer;
+
+            transition:
+                transform 0.2s,
+                box-shadow 0.2s;
+        }
+
+        .card:hover {
+            transform: translateY(-4px);
+
+            box-shadow:
+                0 8px 15px rgba(0,0,0,0.10);
+        }
+
+        .card img {
+            width: 100%;
+            height: 200px;
+
+            object-fit: contain;
+
+            border-radius: 8px;
+
+            margin-bottom: 12px;
+        }
+
+        .card h3 {
+            font-size: 1.1rem;
+            margin-bottom: 6px;
+        }
+
+        .price {
+            font-weight: bold;
+            color: #fadc1c;
+            font-size: 1.2rem;
+            margin-bottom: 12px;
+        }
+
+        .card button {
+            background: #25d366;
+            color: white;
+
+            border: none;
+
+            padding: 10px 16px;
+
+            border-radius: 8px;
+
+            font-weight: bold;
+
+            cursor: pointer;
+
+            font-size: 1rem;
+
+            transition: transform 0.2s, background 0.2s;
+        }
+
+        .card button:hover {
+            background: #1ebd56;
+            transform: scale(1.05);
+
+        }
+
+        /* =====================================================
+        PIE DE PÁGINA / CRÉDITOS
+        ===================================================== */
+
+        .footer {
+            margin-top: 50px;
+            padding: 40px 20px 25px 20px;
+
+            background: #000000;
+            color: white;
+
+            border-radius: 0;
+
+            width: 100vw;
+            margin-left: calc(50% - 50vw);
+
+            margin-bottom: -20px;
+
+            box-sizing: border-box;
+        }
+
+        .footer-content {
+            max-width: 1000px;
+            margin: 0 auto;
+
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+
+            gap: 30px;
+        }
+
+        .footer-info h2 {
+            margin-bottom: 15px;
+        }
+
+        .footer-info p {
+            margin: 8px 0;
+            color: #ffffff;
+        }
+
+        .footer-info a {
+            color: #1196ee;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        .footer-info a:hover {
+            text-decoration: underline;
+        }
+
+        .footer-credit {
+            text-align: right;
+            color: #999;
+        }
+
+        .footer-credit p {
+            margin: 6px 0;
+        }
+
+        .background-image {
+            z-index: 0;
+            pointer-events: none;
+        }
+
+        .footer {
+            position: relative;
+            z-index: 1;
+        }
+
+        .menu-categories {
+            z-index: 5000 !important;
+        }
+
+        .categories {
+            z-index: 4999 !important;
+        }
+
+
+        /* CELULAR */
+
+        @media (max-width: 700px) {
+
+            .footer {
+                margin-top: 35px;
+                padding: 30px 20px 20px;
+            }
+
+            .footer-content {
+                flex-direction: column;
+                align-items: center;
+                text-align: center;
+            }
+
+            .footer-credit {
+                text-align: center;
+            }
+
+        }
+
+
+        /* =====================================================
+           CARRITO DE COMPUTADORA
+        ===================================================== */
+
+        .cart-section {
+            background-color: white;
+
+            border-radius: 12px;
+
+            padding: 20px;
+
+            border: 3px solid #0354eacc;
+
+            box-shadow:
+                0 4px 6px rgba(0,0,0,0.05);
+
+            position: sticky;
+
+            top: 20px;
+        }
+
+        .cart-section h2 {
+            margin-bottom: 10px;
+        }
+
+
+        /* =====================================================
+           ELEMENTOS DEL CARRITO
+        ===================================================== */
+
+        .cart-item {
+            display: flex;
+
+            justify-content: space-between;
+
+            align-items: center;
+
+            padding: 12px 0;
+
+            border-bottom: 1px solid #eee;
+
+            gap: 10px;
+        }
+
+        .cart-info {
+            flex: 1;
+        }
+
+        .cart-name {
+            font-weight: bold;
+        }
+
+        .cart-price {
+            color: #666;
+            font-size: 0.9rem;
+        }
+
+
+        /* =====================================================
+           BOTON DELETE
+        ===================================================== */
+
+        .quantity-controls {
+            display: flex;
+
+            align-items: center;
+
+            gap: 8px;
+        }
+
+        .quantity-controls button {
+            width: 30px;
+            height: 30px;
+
+            border: none;
+
+            border-radius: 6px;
+
+            background: #eee;
+
+            cursor: pointer;
+
+            font-size: 1.1rem;
+        }
+
+        .quantity-controls button:hover {
+            background: #ddd;
+        }
+
+        .delete-btn {
+            background: #e0210b !important;
+            color: white;
+        }
+
+        .delete-btn i {
+            font-size: 16px;
+        }
+
+
+        /* =====================================================
+           TOTAL
+        ===================================================== */
+
+        .cart-total {
+            font-size: 1.3rem;
+
+            font-weight: bold;
+
+            text-align: right;
+
+            margin-top: 16px;
+        }
+
+
+        /* =====================================================
+           FORMULARIO
+        ===================================================== */
+
+        .form-group {
+            margin-top: 15px;
+        }
+
+        .form-group label {
+            display: block;
+
+            margin-bottom: 5px;
+
+            font-size: 0.9rem;
+
+            font-weight: bold;
+        }
+
+        .form-group input {
+            width: 100%;
+
+            padding: 10px;
+
+            border: 3px solid #0354eacc;
+
+            border-radius: 6px;
+
+            font-size: 1rem;
+        }
+
+
+        /* =====================================================
+           BOTÓN WHATSAPP
+        ===================================================== */
+
+        .btn-send {
+            width: 100%;
+
+            background: #128c55;
+
+            margin-top: 20px;
+
+            padding: 14px;
+
+            font-size: 1rem;
+
+            color: white;
+
+            border: none;
+
+            border-radius: 10px;
+
+            font-weight: bold;
+
+            cursor: pointer;
+
+            transition: transform 0.2s, background 0.2s;
+        }
+
+       .btn-send:hover {
+            background: #128c55;
+            transform: scale(1.03);
+        }
+
+        /* =====================================================
+           SIN RESULTADOS
+        ===================================================== */
+
+        .no-results {
+            grid-column: 1 / -1;
+
+            text-align: center;
+
+            color: #777;
+
+            padding: 30px;
+        }
+
+
+            /* =====================================================
+            MODAL DEL PRODUCTO
+            ===================================================== */
+
+            .modal {
+                display: none;
+
+                position: fixed;
+
+                z-index: 1000;
+
+                left: 0;
+                top: 0;
+
+                width: 100%;
+                height: 100%;
+
+                background: rgba(0,0,0,0.7);
+
+                align-items: center;
+
+                justify-content: center;
+
+                padding: 20px;
+            }
+
+            .modal-content {
+                background: white;
+
+                width: 100%;
+
+                max-width: 600px;
+
+                max-height: 90vh;
+
+                overflow-y: auto;
+
+                border-radius: 15px;
+
+                padding: 20px;
+
+                position: relative;
+
+                text-align: center;
+            }
+
+        .close {
+            position: absolute;
+
+            top: 10px;
+            right: 12px;
+
+            width: 45px;
+            height: 45px;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            font-size: 32px;
+            font-weight: bold;
+
+            color: #555;
+
+            background: #ffffff;
+
+            border-radius: 50%;
+
+            cursor: pointer;
+
+            z-index: 100;
+
+            line-height: 1;
+        }
+
+        .close:hover {
+            background: #ffffff;
+            color: #000;
+        }
+
+        .modal-image {
+            width: 100%;
+
+            height: 350px;
+
+            object-fit: contain;
+
+            border-radius: 10px;
+
+            margin-bottom: 15px;
+        }
+
+        .modal-gallery {
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .gallery-btn {
+            position: absolute;
+
+            top: 50%;
+            transform: translateY(-50%);
+
+            width: 45px;
+            height: 45px;
+
+            border: none;
+            border-radius: 50%;
+
+            background: rgba(0, 0, 0, 0.6);
+            color: white;
+
+            font-size: 35px;
+            line-height: 35px;
+
+            cursor: pointer;
+
+            z-index: 10;
+        }
+
+        .gallery-btn:hover {
+            background: rgba(0, 0, 0, 0.8);
+        }
+
+        .gallery-btn.prev {
+            left: 10px;
+        }
+
+        .gallery-btn.next {
+            right: 10px;
+        }
+
+        #image-counter {
+            text-align: center;
+            margin-top: 5px;
+            margin-bottom: 15px;
+            color: #777;
+            font-size: 0.9rem;
+        }
+
+        .modal-content h2 {
+            margin-bottom: 8px;
+        }
+
+        .modal-price {
+            color: #fadc1c;
+
+            font-size: 1.5rem;
+
+            font-weight: bold;
+
+            margin-bottom: 15px;
+        }
+
+        .modal-description {
+            color: #000000;
+
+            line-height: 1.5;
+
+            margin-bottom: 20px;
+        }
+
+        .modal-add {
+            background: #25d366;
+
+            color: white;
+
+            border: none;
+
+            padding: 13px 20px;
+
+            border-radius: 8px;
+
+            font-weight: bold;
+
+            font-size: 1rem;
+
+            cursor: pointer;
+
+            width: 100%;
+        }
+
+        .modal-add:hover {
+            background: #1ebd56;
+        }
+
+
+        /* =====================================================
+           BOTÓN CARRITO CELULAR
+        ===================================================== */
+
+            .mobile-cart-button {
+            display: none;
+
+            position: fixed;
+
+            top: 20px;
+
+            right: 20px;
+
+            width: 55px;
+
+            height: 55px;
+
+            border: none;
+
+            border-radius: 50%;
+
+            background: white;
+
+            font-size: 28px;
+
+            cursor: pointer;
+            
+            box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+            z-index: 5000;
+        }
+
+
+        /* =====================================================
+           NÚMERO DEL CARRITO
+        ===================================================== */
+
+        #cart-count {
+
+            position: absolute;
+
+            top: -5px;
+
+            right: -5px;
+
+            min-width: 22px;
+
+            height: 22px;
+
+            padding: 2px 6px;
+
+            background: red;
+
+            color: white;
+
+            border-radius: 50%;
+
+            font-size: 13px;
+
+            font-weight: bold;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+        }
+
+
+        /* =====================================================
+           MODAL CARRITO CELULAR
+        ===================================================== */
+
+        .mobile-cart-modal {
+
+            display: none;
+
+            position: fixed;
+
+            z-index: 6000;
+
+            left: 0;
+
+            top: 0;
+
+            width: 100%;
+
+            height: 100%;
+
+            background: rgba(0,0,0,0.6);
+
+            padding: 15px;
+
+            align-items: center;
+
+            justify-content: center;
+        }
+
+        .mobile-cart-content {
+
+            background: white;
+
+            width: 100%;
+
+            max-width: 500px;
+
+            max-height: 90vh;
+
+            overflow-y: auto;
+
+            border-radius: 15px;
+
+            padding: 20px;
+
+            position: relative;
+        }
+
+        .mobile-cart-close {
+
+            position: absolute;
+
+            right: 15px;
+
+            top: 10px;
+
+            font-size: 30px;
+
+            font-weight: bold;
+
+            cursor: pointer;
+        }
+
+
+        /* =====================================================
+           CELULAR
+        ===================================================== */
+
+        @media (max-width: 700px) {
+
+            body {
+                padding: 0;
+            }
+
+            header p {
+                width: calc(100% - 30px);
+                box-sizing: border-box;
+                margin: 10px auto;
+                padding: 10px 14px;
+            }
+
+            /* Carrito normal desaparece */
+
+            .cart-section {
+                display: none;
+            }
+
+
+            /* Catálogo ocupa todo */
+
+            .catalog-layout {
+                grid-template-columns: 1fr;
+            }
+
+
+            /* Botón carrito aparece */
+
+            .mobile-cart-button {
+                display: block;
+            }
+
+
+            /* Productos en dos columnas */
+
+            .grid {
+                grid-template-columns:
+                    repeat(2, 1fr);
+
+                gap: 12px;
+            }
+
+
+            /* Tarjetas */
+
+            .card {
+                padding: 10px;
+            }
+
+
+            /* Imágenes */
+
+            .card img {
+                height: 150px;
+            }
+
+
+            /* Nombre */
+
+            .card h3 {
+                font-size: 0.95rem;
+            }
+
+
+            /* Precio */
+
+            .price {
+                font-size: 1rem;
+            }
+
+
+            /* Botón */
+
+            .card button {
+                font-size: 0.95rem;
+
+                padding: 9px;
+            }
+
+
+            /* Logo */
+
+            .logo {
+                width: 180px;
+            }
+
+
+            /* Modal producto */
+
+            .modal-image {
+                height: 250px;
+            }
+
+            /* Fondo en celular */
+            .background-image {
+                width: 100%;
+                height: 100vh;
+                object-fit: cover;
+                object-position: center;
+            }
+
+
+        }
+
+        /* AJUSTE FINAL DEL MENU EN CELULAR */
+        @media (max-width: 700px) {
+
+        .menu-categories {
+            width: 135px !important;
+            height: 42px !important;
+
+            position: absolute !important;
+            left: 8px !important;
+            top: 10px !important;
+
+            padding: 0 6px !important;
+            margin: 0 !important;
+
+            font-size: 16px !important;
+            z-index: 100 !important;
+
+            box-sizing: border-box !important;
+        }
+
+        .menu-categories span {
+            font-size: 16px !important;
+        }
+    }
+    /* =====================================================
+    MENÚ DE CATEGORÍAS
+    ===================================================== */
+
+    .menu-categories {
+        position: fixed;
+
+        top: 20px;
+        left: 20px;
+
+        height: 50px;
+        padding: 0 15px;
+
+        border: 3px solid #0354eacc;
+        border-radius: 10px;
+
+        background: white;
+
+        font-size: 25px;
+        font-weight: bold;
+
+        cursor: pointer;
+
+        box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+
+        z-index: 5000;
+
+        display: flex;
+        align-items: center;
+        gap: 8px;
+
+        transition: transform 0.2s;
+    }
+
+    .menu-categories:hover {
+        transform: scale(1.08);
+    }
+
+    .menu-categories span {
+        font-size: 16px;
+    }
+
+
+    /* =====================================================
+    LISTA DE CATEGORÍAS
+    ===================================================== */
+
+    .categories {
+        display: none;
+
+        position: fixed;
+
+        top: 80px;
+        left: 20px;
+
+        width: 240px;
+
+        /* Altura máxima del menú */
+        max-height: 70vh;
+
+        /* Barra desplazadora vertical */
+        overflow-y: auto;
+        overflow-x: hidden;
+
+        background: white;
+
+        border-radius: 12px;
+
+        padding: 10px;
+
+        box-shadow: 0 5px 20px rgba(0,0,0,0.25);
+
+        z-index: 4999;
+
+        flex-direction: column;
+
+        gap: 5px;
+    }
+
+
+    /* =====================================================
+    BARRA DESPLAZADORA
+    ===================================================== */
+
+    .categories::-webkit-scrollbar {
+        width: 8px;
+    }
+
+    .categories::-webkit-scrollbar-track {
+        background: #f1f1f1;
+
+        border-radius: 10px;
+    }
+
+    .categories::-webkit-scrollbar-thumb {
+        background: #aaa;
+
+        border-radius: 10px;
+    }
+
+    .categories::-webkit-scrollbar-thumb:hover {
+        background: #777;
+    }
+
+
+    /* =====================================================
+    MENÚ ABIERTO
+    ===================================================== */
+
+    .categories.show {
+        display: flex;
+    }
+
+
+    /* =====================================================
+    BOTONES DE CATEGORÍA
+    ===================================================== */
+
+    .categories .category-btn {
+
+        width: 100%;
+
+        text-align: left;
+
+        border: none;
+
+        border-radius: 8px;
+
+        padding: 12px;
+
+        background: white;
+
+        color: #333;
+
+        cursor: pointer;
+
+        font-size: 1rem;
+
+        font-weight: bold;
+    }
+
+
+    /* Al pasar el mouse */
+
+    .categories .category-btn:hover {
+        background: #eee;
+    }
+
+
+    /* Categoría seleccionada */
+
+    .categories .category-btn.active {
+        background: #ff5e00;
+
+        color: white;
+    }
+
+
+    /* =====================================================
+    IMAGEN ENCIMA DEL FONDO
+    ===================================================== */
+
+    .background-image {
+        position: fixed;
+
+        top: 0;
+        left: 0;
+
+        width: 100%;
+        height: 100%;
+
+        object-fit: cover;
+
+        opacity: 0.20;
+
+        pointer-events: none;
+
+        z-index: 0;
+    }
+
+    /* CONTENIDO POR ENCIMA DE LA IMAGEN */
+
+    .container {
+        position: relative;
+        z-index: 20;
+    }
+
+    .menu-categories,
+    .mobile-cart-button,
+    #back-to-top {
+        z-index: 5000;
+    }
+
+        /* =====================================================
+        MENU CATALOGO POR ENCIMA DEL FOOTER
+        ===================================================== */
+
+        .container {
+            position: relative;
+            z-index: 20;
+        }
+
+        .footer {
+            position: relative;
+            z-index: 10;
+        }
+
+        .menu-categories,
+        .categories {
+            z-index: 5000 !important;
+        }
+
+
+        .original-price {
+            color: #dc2626;
+            text-decoration: line-through;
+            font-size: 0.9rem;
+            margin-right: 8px;
+        }
+
+        .current-price {
+            color: #fadc1c;
+            font-weight: bold;
+            font-size: 1.1rem;
+        }
+
+
+        </style>
+
+</head>
+
+
+<body>
+
+    <img
+        src="fondo2.png"
+        class="background-image"
+        alt=""
+    >
+    
+<button 
+        class="menu-categories" onclick="toggleCategories()">
+        <i class="fa-solid fa-bars"></i>
+
+        <span>CATÁLOGO</span>
+</button>
+
+<div class="container">
+
+
+    <!-- =====================================================
+         BOTÓN CARRITO CELULAR
+    ====================================================== -->
+
+    <button
+        class="mobile-cart-button"
+        onclick="openMobileCart()"
+        type="button"
+    >
+
+        <i class="fa-solid fa-cart-shopping"></i>
+
+        <span id="cart-count">
+            0
+        </span>
+
+    </button>
+
+
+    <!-- =====================================================
+         ENCABEZADO
+    ====================================================== -->
+
+    <header>
+
+        <img
+            src="logo.webp"
+            alt=""
+            class="logo"
+        >
+
+        <p>
+            ELEGÍ TUS PRODUCTOS DEL CATÁLOGO Y REALIZÁ EL PEDIDO
+        </p>
+
+    </header>
+
+
+    <!-- =====================================================
+         BUSCADOR
+    ====================================================== -->
+
+    <div class="search-box">
+
+            <i class="fa-solid fa-magnifying-glass"></i>
+
+            <input
+                type="text"
+                id="search"
+                placeholder=" Buscar productos..."
+                oninput="filterProducts()"
+            >
+
+    </div>
+
+
+    <!-- =====================================================
+         CATEGORÍAS
+    ====================================================== -->
+
+    <div
+        class="categories"
+        id="categories"
+    ></div>
+
+
+    <!-- =====================================================
+         CATÁLOGO + CARRITO
+    ====================================================== -->
+
+    <div class="catalog-layout">
+
+
+        <!-- PRODUCTOS -->
+
+        <div class="products-section">
+
+            <div
+                class="grid"
+                id="products-list"
+            ></div>
+
+        </div>
+
+
+        <!-- =================================================
+             CARRITO COMPUTADORA
+        ================================================== -->
+
+        <div class="cart-section">
+
+            <h2>
+                Tu Pedido
+            </h2>
+
+
+            <div id="cart-items">
+
+                <p style="color:#888; margin-top:10px;">
+                    El carrito está vacío.
+                </p>
+
+            </div>
+
+
+            <div
+                class="cart-total"
+                id="cart-total"
+            >
+                Total: $0
+            </div>
+
+
+            <!-- NOMBRE -->
+
+            <div class="form-group">
+
+                <label for="client-name">
+                    Nombre y Apellido:
+                </label>
+
+                <input
+                    type="text"
+                    id="client-name"
+                >
+
+            </div>
+
+
+            <!-- WHATSAPP -->
+
+            <button
+                class="btn-send"
+                onclick="sendWhatsApp()"
+                type="button"
+            >
+
+                Enviar Pedido por WhatsApp
+
+            </button>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+<!-- =========================================================
+     MODAL PRODUCTO
+========================================================= -->
+
+<div
+    class="modal"
+    id="product-modal"
+    onclick="closeModalOutside(event)"
+>
+
+    <div
+        class="modal-content"
+        onclick="event.stopPropagation()"
+    >
+
+        <span
+            class="close"
+            onclick="closeModal()"
+        >
+            &times;
+        </span>
+
+
+      <div class="modal-gallery">
+
+    <button
+        class="gallery-btn prev"
+        onclick="previousImage()"
+        type="button"
+    >
+        ‹
+    </button>
+
+    <img
+        id="modal-image"
+        class="modal-image"
+        src=""
+        alt=""
+    >
+
+    <button
+        class="gallery-btn next"
+        onclick="nextImage()"
+        type="button"
+    >
+        ›
+    </button>
+
+</div>
+
+<div id="image-counter"></div>
+
+
+        <h2 id="modal-name"></h2>
+
+
+        <div
+            class="modal-price"
+            id="modal-price"
+        ></div>
+
+
+        <p
+            class="modal-description"
+            id="modal-description"
+        ></p>
+
+
+        <button
+            class="modal-add"
+            id="modal-add-button"
+            type="button"
+        >
+            Agregar al pedido
+        </button>
+
+    </div>
+
+</div>
+
+
+<!-- =========================================================
+     CARRITO CELULAR
+========================================================= -->
+
+<div
+    class="mobile-cart-modal"
+    id="mobile-cart-modal"
+    onclick="closeMobileCartOutside(event)"
+>
+
+    <div
+        class="mobile-cart-content"
+        onclick="event.stopPropagation()"
+    >
+
+
+        <span
+            class="mobile-cart-close"
+            onclick="closeMobileCart()"
+        >
+            &times;
+        </span>
+
+
+        <h2>
+            Tu Pedido
+        </h2>
+
+
+        <div id="mobile-cart-items">
+
+            <p style="color:#888; margin-top:10px;">
+                El carrito está vacío.
+            </p>
+
+        </div>
+
+
+        <div
+            class="cart-total"
+            id="mobile-cart-total"
+        >
+            Total: $0
+        </div>
+
+
+        <!-- NOMBRE -->
+
+        <div class="form-group">
+
+            <label for="mobile-client-name">
+                Nombre y Apellido:
+            </label>
+
+            <input
+                type="text"
+                id="mobile-client-name"
+            >
+
+        </div>
+
+        <!-- WHATSAPP -->
+
+        <button
+            class="btn-send"
+            onclick="sendWhatsApp()"
+            type="button"
+        >
+
+            Enviar Pedido por WhatsApp
+
+        </button>
+
+    </div>
+
+</div>
+
+<script>
+
+    /* =====================================================
+       WHATSAPP
+    ===================================================== */
+
+    const PHONE_NUMBER = "543794156913";
+
+
+    /* =====================================================
+       PRODUCTOS
+    ===================================================== */
+
+    const products = [
+
+        {
+            id: 1,
+            name: "HAZMAT FLEXY",
+            price: 7000,
+            img: "animalhospital/hazmat.jpg",
+            category: "Animal Hospital",
+            description: "STL de Hazmat del juego Animal Hospital de roblox."
+        },
+
+        {
+            id: 2,
+            name: "ASECHADOR FLEXY",
+            price: 8000,
+            img: "animalhospital/asechador.jpeg",
+            category: "Animal Hospital",
+            description: "STL de Asechador del juego Animal Hospital de roblox."
+        },
+
+        {
+            id: 3,
+            name: "BRATLY FLEXY",
+            price: 7000,
+            img: "animalhospital/bratly.jpeg",
+            category: "Animal Hospital",
+            description: "STL de Bratly del juego Animal Hospital de roblox."
+        },
+
+        {
+            id: 4,
+            name: "DUCKMAN FLEXY",
+            price: 7000,
+            img: "animalhospital/duckman.jpeg",
+            category: "Animal Hospital",
+            description: "STL de Duckman del juego Animal Hospital de roblox."
+        },
+
+         {
+            id: 5,
+            name: "TINY FLEXY",
+            price: 7000,
+            img: "animalhospital/tiny.jpeg",
+            category: "Animal Hospital",
+            description: "STL de Tiny del juego Animal Hospital de roblox."
+        },
+
+        {
+            id: 6,
+            name: "AGENTE SECRETO FLEXY",
+            price: 7000,
+            img: "animalhospital/gatonegro.jpg",
+            category: "Animal Hospital",
+            description: "STL de Agente secreto del juego Animal Hospital de roblox."
+        },
+
+         {
+            id: 7,
+            name: "VERITY FLEXY",
+            price: 8000,
+            img: "verity/verity.jpeg",
+            category: "Verity",
+            description: "STL de Verity de roblox."
+        },
+
+         {
+            id: 8,
+            name: "MESSI FLEXY",
+            price: 10000,
+            img: "https://images.cults3d.com/vC19c9Amv_9AXdAHDP96IOPd22I=/516x516/filters:no_upscale():format(webp)/https://fbi.cults3d.com/uploaders/33145565/illustration-file/9768d4c8-0849-48aa-9dbd-b692d5f59418/QCOSA3D-MESSI-MUNECO-ARTICULADO.jpg",
+            category: "Mundial",
+            description: "STL de Messi articulado, brazos intercambiables."
+        },
+
+         {
+            id: 9,
+            name: "WOODY FLEXY",
+            price: 10000,
+            img: "https://images.cults3d.com/tdVkv9DhJW4CmtPWBLwpcLFPn0w=/516x516/filters:no_upscale():format(webp)/https://fbi.cults3d.com/uploaders/33145565/illustration-file/321e7eca-db5d-4e7d-83e4-437196c60f7e/QCOSA3D-WOODY.jpg",
+            category: "Toy Story",
+            description: "STL de Woody de la pelicula Toy Story."
+        },
+
+          {
+            id: 10,
+            name: "ONCE Y DEMOGORGON",
+            price: 10000,
+            img: "https://images.cults3d.com/1Q5lPWCUWZLWtwf4VeOkV6QCMRI=/516x516/filters:no_upscale():format(webp)/https://fbi.cults3d.com/uploaders/33145565/illustration-file/2d631d0c-81bb-4d81-a67b-24e7b13c5add/QCOSA3D-STRANGER-THINGS-X2.jpg",
+            category: "Stranger Things",
+            description: "Combo STL de once y demogorgon de la serie Stranger Things."
+        },
+
+          {
+            id: 11,
+            name: "MAX Y VECNA",
+            price: 10000,
+            img: "https://images.cults3d.com/ZPXa5SAMYrbdVgi9IgwKFFhpwPY=/516x516/filters:no_upscale():format(webp)/https://fbi.cults3d.com/uploaders/33145565/illustration-file/25152713-88d5-4529-a4b5-cc719f339fdc/QCOSA3D-STRENGER-THINGS-VEGNA-Y-MAX.jpg",
+            category: "Stranger Things",
+            description: "Combo STL de Max y Vecna de la serie Stranger Things."
+        },
+
+          {
+            id: 12,
+            name: "DUSTIN Y STEVE",
+            price: 10000,
+            img: "https://images.cults3d.com/cARmqzVxGCF21lSigqnRkelxLE0=/516x516/filters:no_upscale():format(webp)/https://fbi.cults3d.com/uploaders/33145565/illustration-file/8a518e29-5f4d-4bd2-9ba9-0883a2093569/QCOSA3D-DUSTIN-Y-STEVE-STRANGER-THINGS-PACK-3.jpg",
+            category: "Stranger Things",
+            description: "Combo STL de Dustin y Steve de la serie Stranger Things."
+        },
+
+          {
+            id: 13,
+            name: "WILL Y MIKE",
+            price: 10000,
+            img: "https://images.cults3d.com/F8bOVgDBc_VWbRiWlodd2YuYz3s=/516x516/filters:no_upscale():format(webp)/https://fbi.cults3d.com/uploaders/33145565/illustration-file/e73e9e15-c1eb-4685-b782-48c2daa3a58f/QCOSA3D-WILL-Y-MIKE-STRANGER-THING-PACK4.jpg",
+            category: "Stranger Things",
+            description: "Combo STL de Will y Mike de la serie Stranger Things."
+        },
+
+          {
+            id: 14,
+            name: "HOPPER Y LUCAS",
+            price: 10000,
+            img: "https://images.cults3d.com/VPyk791GTar9Lr-gAWR4BNJRD7s=/516x516/filters:no_upscale():format(webp)/https://fbi.cults3d.com/uploaders/33145565/illustration-file/16689e71-f0db-479a-bca2-02d555ca9d19/QCOSA3D-HOPER-Y-LUKAS-STRANGER-THINGS.jpg",
+            category: "Stranger Things",
+            description: "Combo STL de Hopper y Lucas de la serie Stranger Things."
+        },
+
+          {
+            id: 15,
+            name: "EDDY Y HENRY",
+            price: 10000,
+            img: "https://images.cults3d.com/URUqJiOP-cK72bhvUfKdX0q5UyQ=/516x516/filters:no_upscale():format(webp)/https://fbi.cults3d.com/uploaders/33145565/illustration-file/b65ca8bd-db57-4133-9403-7cc70fc3b9d4/QCOSA3D-EDDIE-Y-HENRRY-STRANGER-THINGS-PACK-6.jpg",
+            category: "Stranger Things",
+            description: "Combo STL de Eddy y Henry de la serie Stranger Things."
+        },
+
+        {
+            id: 16,
+            name: "LLAVEROS X6",
+            price: 15000,
+            img: "stranger/ministranger.png",
+            category: "Stranger Things",
+            description: "STL de llaveros X6 de la serie Stranger Things."
+        },
+
+          {
+            id: 17,
+            name: "HUNTRIX",
+            price: 15000,
+            img: "https://images.cults3d.com/-OCcWnTaIW6Zy77HeqKkYs-m318=/516x516/filters:no_upscale():format(webp)/https://fbi.cults3d.com/uploaders/33145565/illustration-file/55710c8b-41bf-422c-ab03-e83cedcbecdd/QCOSA3D-MUNECAS-DEMON-HUNTER-KPOP.jpg",
+            category: "Kpop Demon Hunters",
+            description: "STL de las integrantes de Huntrix de la pelicula Kpop Demon Hunters."
+        },
+
+          {
+            id: 18,
+            name: "DERPY",
+            price: 8000,
+            img: "https://images.cults3d.com/-GA2AuAzwVzjGa11hrwCaRIDZoY=/516x516/filters:no_upscale():format(webp)/https://fbi.cults3d.com/uploaders/33145565/illustration-file/7e1ff179-9314-48d0-8928-f2530d81d6ac/QCOSA3D-DERPY-KPOP-DEMON-HUNTER.jpg",
+            category: "Kpop Demon Hunters",
+            description: "STL de Derpy de la pelicula Kpop Demon Hunters."
+        },
+
+        {
+            id: 19,
+            name: "LLAVEROS PLANOS",
+            price: 5000,
+            img: "huntrix/planoshuntrix.png",
+            category: "Kpop Demon Hunters",
+            description: "STL de llaveros planos de Huntrix y Derpy de Kpop Demon Hunters."
+        },
+
+        {
+            id: 20,
+            name: "HUNTRIX LLAVEROS",
+            price: 8000,
+            img: "huntrix/huntrix.png",
+            category: "Kpop Demon Hunters",
+            description: "STL de llaveros Huntrix de Kpop Demon Hunters."
+        },
+
+        {
+            id: 21,
+            name: "SAJA BOYS LLAVEROS",
+            price: 10000,
+            img: "huntrix/sajaboys.png",
+            category: "Kpop Demon Hunters",
+            description: "STL de llaveros Saja Boys de Kpop Demon Hunters."
+        },
+
+          {
+            id: 22,
+            name: "MERLINA + LLAVERO DEDOS",
+            price: 8000,
+            img: "merlina/merlina.jpg",
+            category: "Merlina",
+            description: "STL de Merlina + Llavero de Dedos Articulado."
+        },
+
+        {
+            id: 23,
+            name: "ENID SINCLAIR",
+            price: 8000,
+            img: "https://images.cults3d.com/vDFbukxhdxE0ZWCzjyjin2e2eU4=/516x516/filters:no_upscale():format(webp)/https://fbi.cults3d.com/uploaders/33145565/illustration-file/0fea9e25-f420-4cf3-837c-f4a80205bb18/QCOSA3D-ENID-SINCLAIR-MERLINA.jpg",
+            category: "Merlina",
+            description: "STL de Enid Sinclair Articulado."
+        },
+
+        {
+            id: 24,
+            name: "JAX FLEXY", 
+            price: 6000,
+            img: "digitalcircus/jax.png",
+            category: "Digital Circus",
+            description: "STL de Jax de la serie Digital Circus",
+        },
+
+        {
+            id: 25,
+            name: "CAINE FLEXY", 
+            price: 6000,
+            img: "digitalcircus/caine.png",
+            category: "Digital Circus",
+            description: "STL de Caine de la serie Digital Circus",
+        },
+
+        {
+            id: 26,
+            name: "PONMI FLEXY",
+            price: 6000,
+            img: "digitalcircus/ponmi.png",
+            category: "Digital Circus",
+            description: "STL de Ponmi articulado de la serie Digital Circus",
+        },
+
+        {
+            id: 27,
+            name: "RAGATTA FLEXY",
+            price: 6000,
+            img: "digitalcircus/ragata.png",
+            category: "Digital Circus",
+            description: "STL de Ragatta articulado de la serie Digital Circus",
+        },
+
+        {
+            id: 28,
+            name: "PONMI LLAVERA",
+            price: 5000,
+            img: "digitalcircus/ponmini.png",
+            category: "Digital Circus",
+            description: "STL de llavero de Ponmi de la serie Digital Circus",
+        },
+
+        {
+            id: 27,
+            name: "JAX LLAVERO",
+            price: 5000,
+            img: "digitalcircus/jaxmini.png",
+            category: "Digital Circus",
+            description: "STL llavero de Jax de la serie Digital Circus",
+        },
+
+        {
+            id: 28,
+            name: "KINGER LLAVERO",
+            price: 5000,
+            img: "digitalcircus/kinger.png",
+            category: "Digital Circus",
+            description: "STL llavero de Kinger de la serie Digital Circus",
+        },
+
+        {
+            id: 29,
+            name: "BUBBLE LLAVERO",
+            price: 5000,
+            img: "digitalcircus/buble.png",
+            category: "Digital Circus",
+            description: "STL llavero de Bubble de la serie Digital Circus",
+        },
+
+        {
+            id: 30,
+            name: "FREDDY FLEXY",
+            price: 6000,
+            img: "fnaf/freddy.png",
+            category: "Five Nights at Freddys",
+            description: "STL de Freddy del juego Five Nights at Freddy's",
+        },
+
+        {
+            id: 31,
+            name: "CHICA FLEXY",
+            price: 6000,
+            img: "fnaf/chica.png",
+            category: "Five Nights at Freddys",
+            description: "STL de Chica del juego Five Nights at Freddy's",
+        },
+
+        {
+            id: 32,
+            name: "BONNIE FLEXY",
+            price: 6000,
+            img: "fnaf/bonnie.png",
+            category: "Five Nights at Freddys",
+            description: "STL de Bonnie del juego Five Nights at Freddy's",
+        },
+
+        {
+            id: 33,
+            name: "FOXY FLEXY",
+            price: 6000,
+            img: "fnaf/foxy.png",
+            category: "Five Nights at Freddys",
+            description: "STL de Foxy del juego Five Nights at Freddy's",
+        },
+
+        {
+            id: 34,
+            name: "SPRING BONNIE FLEXY",
+            price: 6000,
+            img: "fnaf/spring.png",
+            category: "Five Nights at Freddys",
+            description: "STL de Spring Bonnie del juego Five Nights at Freddy's",
+        },
+
+        {
+            id: 35,
+            name: "PUPPET FLEXY",
+            price: 6000,
+            img: "fnaf/puppet.png",
+            category: "Five Nights at Freddys",
+            description: "STL de Puppet del juego Five Nights at Freddy's",
+        },
+
+        {
+            id: 36,
+            name: "HOMBRE MORADO FLEXY",
+            price: 6000,
+            img: "fnaf/morado.png",
+            category: "Five Nights at Freddys",
+            description: "STL del Hombre Morado del juego Five Nights at Freddy's",
+        },
+
+        {
+            id: 37,
+            name: "CUPCAKE",
+            price: 6000,
+            img: "fnaf/cupcake.png",
+            category: "Five Nights at Freddys",
+            description: "STL de Cupcake del juego Five Nights at Freddy's",
+        },
+
+        {
+            id: 38,
+            name: "PUPPET",
+            price: 6000,
+            img: "fnaf/puppet2.png",
+            category: "Five Nights at Freddys",
+            description: "STL de Puppet del juego Five Nights at Freddy's",
+        },
+
+        {
+            id: 39,
+            name: "POCHOCLERA FOXY",
+            price: 8000,
+            img: "fnaf/pororo.png",
+            category: "Five Nights at Freddys",
+            description: "STL Pochoclera Foxy del juego Five Nights at Freddy's",
+        },
+
+        {
+            id: 40,
+            name: "FNAF X4",
+            price: 20000,
+            img: "fnaf/fnafx4.png",
+            category: "Five Nights at Freddys",
+            description: "STL muñecos FNAF x4 del juego Five Nights at Freddy's",
+        },
+
+        {
+            id: 41,
+            name: "LLAVEROS FNAF MINI X5",
+            price: 10000,
+            img: "fnaf/llaveros.png",
+            category: "Five Nights at Freddys",
+            description: "STL de Llaveros FNAF Mini X5 del juego Five Nights at Freddy's",
+        },
+
+        {
+            id: 42,
+            name: "STINGER FLYNN",
+            price: 4000,
+            img: "banban/stinger.png",
+            category: "Garten of Banban",
+            description: "STL de Stinger Flynn del juego Garten of Banban",
+        },
+
+        {
+            id: 43,
+            name: "JUMBO JOSH",
+            price: 4000,
+            img: "banban/jumbo.jpg",
+            category: "Garten of Banban",
+            description: "STL de Jumbo Josh del juego Garten of Banban",
+        },
+
+        {
+            id: 44,
+            name: "OPILA BIRD",
+            price: 4000,
+            img: "banban/opila.png",
+            category: "Garten of Banban",
+            description: "STL de Opila Bird del juego Garten of Banban",
+        },
+
+        {
+            id: 45,
+            name: "CAPITAN FIDDLES",
+            price: 4000,
+            img: "banban/fidles.png",
+            category: "Garten of Banban",
+            description: "STL de Capitán Fiddles del juego Garten of Banban",
+        },
+
+        {
+            id: 46,
+            name: "BANBAN",
+            price: 4000,
+            img: "banban/banban.png",
+            category: "Garten of Banban",
+            description: "STL de Banban del juego Garten of Banban",
+        },
+
+        {
+            id: 47,
+            name: "BANBALINA",
+            price: 4000,
+            img: "banban/banbalina.png",
+            category: "Garten of Banban",
+            description: "STL de Banbalina del juego Garten of Banban",
+        },
+
+        {
+            id: 48,
+            name: "LUFFY G5 FLEXY",
+            price: 8000,
+            img: "onepiece/luffy5.png",
+            category: "One Piece",
+            description: "STL de Luffy G5 Flexy del anime One Piece",
+        },
+
+        {
+            id: 49,
+            name: "LUFFY FLEXY",
+            price: 8000,
+            img: "onepiece/luffy.png",
+            category: "One Piece",
+            description: "STL de Luffy articulado del anime One Piece",
+        },
+
+        {
+            id: 50,
+            name: "LLAVERO LUFFY",
+            price: 8000,
+            img: "onepiece/llavero.png",
+            category: "One Piece",
+            description: "STL de Llavero Luffy del anime One Piece",
+        },
+
+        {
+            id: 51,
+            name: "PITUFO",
+            price: 8000,
+            img: "pitufos/pitufo.png",
+            category: "Los Pitufos",
+            description: "STL de Pitufo + llavero de Los Pitufos",
+        },
+
+        {
+            id: 52,
+            name: "PITUFINA",
+            price: 8000,
+            img: "pitufos/pitufina.png",
+            category: "Los Pitufos",
+            description: "STL de Pitufina + llavero de Los Pitufos",
+        },
+
+        {
+            id: 53,
+            name: "PAPÁ PITUFO",
+            price: 8000,
+            img: "pitufos/papa.png",
+            category: "Los Pitufos",
+            description: "STL de Papa Pitufo + llavero de Los Pitufos",
+        },
+
+        {
+            id: 54,
+            name: "ALEJO",
+            price: 8000,
+            img: "alejo/alejo.jpg",
+            category: "Alejo y Valentina",
+            description: "STL de Alejo de Alejo y Valentina",
+        },
+
+        {
+            id: 55,
+            name: "VALENTINA",
+            price: 8000,
+            img: "alejo/valentina.jpg",
+            category: "Alejo y Valentina",
+            description: "STL de Valentina de Alejo y Valentina",
+        },
+
+        {
+            id: 56,
+            name: "VIEJO",
+            price: 8000,
+            img: "alejo/viejo.jpg",
+            category: "Alejo y Valentina",
+            description: "STL de Viejo de Alejo y Valentina",
+        },
+
+        {
+            id: 57,
+            name: "CARLITOX",
+            price: 8000,
+            img: "alejo/carlitox.jpg",
+            category: "Alejo y Valentina",
+            description: "STL de Carlitox de Alejo y Valentina",
+        },
+
+        {
+            id: 58,
+            name: "STAMBLE GUYS FLEXY",
+            price: 4000,
+            img: "stamble/stambleguys.png",
+            category: "Stamble Guys",
+            description: "STL de Stumble Guys articulado",
+        },
+
+        {
+            id: 59,
+            name: "BANANA FLEXY",
+            price: 4000,
+            img: "stamble/banana.png",
+            category: "Stamble Guys",
+            description: "STL de Banana articulado del juego Stamble Guys",
+        },
+
+        {
+            id: 60,
+            name: "BANANA PARA PINTAR",
+            price: 4000,
+            img: "stamble/banana2.png",
+            category: "Stamble Guys",
+            description: "STL de Banana para Pintar del juego Stamble Guys",
+        },
+
+        {
+            id: 61,
+            name: "NINJA FLEXY",
+            price: 4000,
+            img: "stamble/ninja.png",
+            category: "Stamble Guys",
+            description: "STL de Ninja articuladodel juego Stamble Guys",
+        },
+
+        {
+            id: 62,
+            name: "ALIEN FLEXY",
+            price: 4000,
+            img: "stamble/alien.png",
+            category: "Stamble Guys",
+            description: "STL de Alien articulado del juego Stamble Guys",
+        },
+
+        {
+            id: 63,
+            name: "BLUE",
+            price: 4000,
+            img: "rainbow/blue.png",
+            category: "Rainbow Friends",
+            description: "STL de Blue del juego Rainbow Friends",
+        },
+
+        {
+            id: 64,
+            name: "YELLOW",
+            price: 4000,
+            img: "rainbow/yellow.png",
+            category: "Rainbow Friends",
+            description: "STL de Yellow del juego Rainbow Friends",
+        },
+
+        {
+            id: 65,
+            name: "CYAN",
+            price: 4000,
+            img: "rainbow/cyan.png",
+            category: "Rainbow Friends",
+            description: "STL de Cyan del juego Rainbow Friends",
+        },
+
+        {
+            id: 66,
+            name: "PINK",
+            price: 4000,
+            img: "rainbow/pink.png",
+            category: "Rainbow Friends",
+            description: "STL de Pink del juego Rainbow Friends",
+        },
+
+        {
+            id: 67,
+            name: "BLUE HALLOWEEN",
+            price: 4000,
+            img: "rainbow/halloween.png",
+            category: "Rainbow Friends",
+            description: "STL de Blue Halloween del juego Rainbow Friends",
+        },
+        
+        {
+            id: 68,
+            name: "MONOCROME",
+            price: 4000,
+            img: "rainbow/monocrome.png",
+            category: "Rainbow Friends",
+            description: "STL de Monocrome del juego Rainbow Friends",
+        },
+
+        {
+            id: 69,
+            name: "PURPLE",
+            price: 4000,
+            img: "rainbow/purple.png",
+            category: "Rainbow Friends",
+            description: "STL de Purple del juego Rainbow Friends",
+        },
+
+        {
+            id: 70,
+            name: "YELLOW 4 BRAZOS",
+            price: 4000,
+            img: "rainbow/yellow4.png",
+            category: "Rainbow Friends",
+            description: "STL de Yellow 4 brazos del juego Rainbow Friends",
+        },
+
+        {
+            id: 71,
+            name: "LIME",
+            price: 4000,
+            img: "rainbow/lime.png",
+            category: "Rainbow Friends",
+            description: "STL de Lime del juego Rainbow Friends",
+        },
+
+        {
+            id: 72,
+            name: "GREEN",
+            price: 4000,
+            img: "rainbow/green.png",
+            category: "Rainbow Friends",
+            description: "STL de Green del juego Rainbow Friends",
+        },
+
+        {
+            id: 73,
+            name: "MEGA CHARIZARD X",
+            price: 8000,
+            img: "pokemon/charizardx.png",
+            category: "Pokemon",
+            description: "STL de Mega Charizard X del anime Pokemon",
+        },
+
+        {
+            id: 74,
+            name: "MEGA CHARIZARD Y",
+            price: 8000,
+            img: "pokemon/charizardy.png",
+            category: "Pokemon",
+            description: "STL de Mega Charizard Y del anime Pokemon",
+        },
+
+        {
+            id: 75,
+            name: "MEGA STEELIX",
+            price: 8000,
+            img: "pokemon/steelix.png",
+            category: "Pokemon",
+            description: "STL de Mega Steelix del anime Pokemon",
+        },
+
+        {
+            id: 76,
+            name: "AERODACTYL FLEXY",
+            price: 8000,
+            img: "pokemon/aerodactil.png",
+            category: "Pokemon",
+            description: "STL de Aerodactyl articulado del anime Pokemon",
+        },
+
+        {
+            id: 77,
+            name: "DORADO",
+            price: 15000,
+            img: "peces/dorado.png",
+            category: "Peces",
+            description: "STL de Dorado con base + llavero.",
+        },
+
+        {
+            id: 78,
+            name: "PEJERREY",
+            price: 12000,
+            img: "peces/pejerrey.png",
+            category: "Peces",
+            description: "STL de Pejerrey con base + llavero.",
+        },
+
+        {
+            id: 79,
+            name: "CORVINA",
+            price: 12000,
+            img: "peces/corvina.png",
+            category: "Peces",
+            description: "STL de Corvina con base + llavero.",
+        },
+
+        {
+            id: 80,
+            name: "BOGA",
+            price: 12000,
+            img: "peces/boga.png",
+            category: "Peces",
+            description: "STL de Boga con base + llavero.",
+        },
+
+        {
+            id: 81,
+            name: "PACU",
+            price: 12000,
+            img: "peces/pacu.png",
+            category: "Peces",
+            description: "STL de Pacu con base + llavero.",
+        },
+
+        {
+            id: 82,
+            name: "SURUBI",
+            price: 15000,
+            img: "peces/surubi.png",
+            category: "Peces",
+            description: "STL de Surubi con base + llavero.",
+        },
+
+        {
+            id: 83,
+            name: "TARARIRA",
+            price: 15000,
+            img: "peces/tararira.png",
+            category: "Peces",
+            description: "STL de Tararira con base + llavero.",
+        },
+
+        {
+            id: 84,
+            name: "DORADO SALTANDO",
+            price: 15000,
+            img: "peces/dorado2.png",
+            category: "Peces",
+            description: "STL de Dorado saltando con base.",
+        },
+
+        {
+            id: 85,
+            name: "TRUCHA ARCOIRIS",
+            price: 12000,
+            img: "peces/trucha.png",
+            category: "Peces",
+            description: "STL de Trucha Arcoiris + llavero.",
+        },
+
+        {
+            id: 86,
+            name: "STEVE",
+            price: 7000,
+            img: "minecraft/steve.png",
+            category: "Minecraft",
+            description: "STL de Steve articulado del juego Minecraft",
+        },
+
+        {
+            id: 87,
+            name: "STEVE + ARMADURA",
+            price: 7000,
+            img: "minecraft/armadura.png",
+            category: "Minecraft",
+            description: "STL de Steve con armadura articulado del juego Minecraft",
+        },
+
+        {
+            id: 88,
+            name: "ALEX Y CREEPER",
+            price: 7000,
+            img: "minecraft/alex.png",
+            category: "Minecraft",
+            description: "STL de Alex articulado y Creeper del juego Minecraft",
+        },
+
+        {
+            id: 89,
+            name: "ZOOMBIE X2",
+            price: 7000,
+            img: "minecraft/zombie.png",
+            category: "Minecraft",
+            description: "STL de Zombie x2 del juego Minecraft",
+        },
+
+        {
+            id: 90,
+            name: "ESQUELETO",
+            price: 7000,
+            img: "minecraft/skeleto.png",
+            category: "Minecraft",
+            description: "STL de Esqueleto articulado del juego Minecraft",
+        },
+
+        {
+            id: 91,
+            name: "GOLEM DE HIERRO",
+            price: 7000,
+            img: "minecraft/golem.png",
+            category: "Minecraft",
+            description: "STL de Golem articulado del juego Minecraft",
+        },
+
+        {
+            id: 92,
+            name: "ENDERMAN",
+            price: 7000,
+            img: "minecraft/enderman.png",
+            category: "Minecraft",
+            description: "STL de Enderman del juego Minecraft",
+        },
+
+        {
+            id: 93,
+            name: "ENDERMAN FLEXY",
+            price: 7000,
+            img: "minecraft/enderman2.png",
+            category: "Minecraft",
+            description: "STL de Enderman con base del juego Minecraft",
+        },
+
+        {
+            id: 94,
+            name: "DIORAMA ENDERMAN",
+            price: 8000,
+            img: "minecraft/enderman3.png",
+            category: "Minecraft",
+            description: "STL de Diorama Enderman del juego Minecraft",
+        },
+
+        {
+            id: 95,
+            name: "PIGLIN",
+            price: 7000,
+            img: "minecraft/piglin.png",
+            category: "Minecraft",
+            description: "STL de Piglin articulado del juego Minecraft",
+        },
+
+        {
+            id: 96,
+            name: "GHAST",
+            price: 7000,
+            img: "minecraft/ghast.png",
+            category: "Minecraft",
+            description: "STL de Ghast del juego Minecraft",
+        },
+
+        {
+            id: 97,
+            name: "BRUJA Y ALDEANO",
+            price: 7000,
+            img: "minecraft/bruja.png",
+            category: "Minecraft",
+            description: "STL Bruja y Aldeano articulados del juego Minecraft",
+        },
+
+        {
+            id: 98,
+            name: "CREEPER",
+            price: 7000,
+            img: "minecraft/creeper.png",
+            category: "Minecraft",
+            description: "STL de Creeper de Minecraft: La Pelicula.",
+        },
+
+        {
+            id: 99,
+            name: "OVEJA",
+            price: 7000,
+            img: "minecraft/oveja.png",
+            category: "Minecraft",
+            description: "STL de Oveja de Minecraft: La Pelicula.",
+        },
+
+        {
+            id: 100,
+            name: "LLAMA",
+            price: 7000,
+            img: "minecraft/llama.png",
+            category: "Minecraft",
+            description: "STL de Llama de Minecraft: La Pelicula.",
+        },
+
+        {
+            id: 101,
+            name: "ABEJA",
+            price: 7000,
+            img: "minecraft/abeja.png",
+            category: "Minecraft",
+            description: "STL de Abeja de Minecraft: La Pelicula.",
+        },
+
+        {
+            id: 102,
+            name: "DENNIS",
+            price: 7000,
+            img: "minecraft/dennis.png",
+            category: "Minecraft",
+            description: "STL de Dennis de Minecraft: La Pelicula.",
+        },
+
+        {
+            id: 103,
+            name: "ZOMBIE BEBE Y PATO",
+            price: 7000,
+            img: "minecraft/pato.png",
+            category: "Minecraft",
+            description: "STL de Zombi Bebé y Pato de Minecraft: La Pelicula.",
+        },
+        
+        {
+            id: 104,
+            name: "DESPACITO SPIDER",
+            price: 5000,
+            img: "doors/spider.png",
+            category: "Doors",
+            description: "STL Despacito Spider del juego Doors de Roblox.",
+        },
+
+        {
+            id: 105,
+            name: "SEEK",
+            price: 7000,
+            img: "doors/seek.png",
+            category: "Doors",
+            description: "STL Seek del juego Doors de Roblox.",
+        },
+
+        {
+            id: 106,
+            name: "JACK",
+            price: 7000,
+            img: "doors/jack.png",
+            category: "Doors",
+            description: "STL Jack del juego Doors de Roblox.",
+        },
+
+        {
+            id: 107,
+            name: "SCREECH",
+            price: 7000,
+            img: "doors/screech.png",
+            category: "Doors",
+            description: "STL Screech del juego Doors de Roblox.",
+        },
+
+        {
+            id: 108,
+            name: "EYES",
+            price: 7000,
+            img: "doors/eyes.png",
+            category: "Doors",
+            description: "STL Eyes del juego Doors de Roblox.",
+        },
+
+        {
+            id: 109,
+            name: "FIGURE",
+            price: 7000,
+            img: "doors/figure.png",
+            category: "Doors",
+            description: "STL Figure del juego Doors de Roblox.",
+        },
+
+        {
+            id: 110,
+            name: "SIREN HEAD",
+            price: 7000,
+            img: "sirenhead/siren.png",
+            category: "Siren Head",
+            description: "STL Siren Head articulado del juego Siren Head.",
+        },
+
+        {
+            id: 111,
+            name: "EYE HEAD",
+            price: 7000,
+            img: "sirenhead/eye.png",
+            category: "Siren Head",
+            description: "STL Eye Head articulado del juego Siren Head.",
+        },
+
+        {
+            id: 112,
+            name: "CHIMNEY",
+            price: 7000,
+            img: "sirenhead/chimney.png",
+            category: "Siren Head",
+            description: "STL Chimney articulado del juego Siren Head.",
+        },
+
+        {
+            id: 113,
+            name: "TRAFFIC LIGHT HEAD",
+            price: 7000,
+            img: "sirenhead/traffic.png",
+            category: "Siren Head",
+            description: "STL Traffic Light Head articulado del juego Siren Head.",
+        },
+
+        {
+            id: 114,
+            name: "SONIC VERSION 2",
+            price: 8000,
+            img: "sonic/sonic.png",
+            category: "Sonic",
+            description: "STL Sonic Version 2 articulado del juego Sonic.",
+        },
+
+        {
+            id: 115,
+            name: "SHIN SONIC",
+            price: 8000,
+            img: "sonic/shin.png",
+            category: "Sonic",
+            description: "STL Shin Sonic de Sonic.",
+        },
+
+        {
+            id: 116,
+            name: "TAILS",
+            price: 8000,
+            img: "sonic/tails.png",
+            category: "Sonic",
+            description: "STL Tails articulado del juego Sonic.",
+        },
+
+        {
+            id: 117,
+            name: "KNUCKLES",
+            price: 8000,
+            img: "sonic/knucles.png",
+            category: "Sonic",
+            description: "STL Knuckles articulado del juego Sonic.",
+        },
+
+        {
+            id: 118,
+            name: "SHADOW SONIC",
+            price: 8000,
+            img: "sonic/shadow.png",
+            category: "Sonic",
+            description: "STL Shadow Sonic articulado del juego Sonic.",
+        },
+
+        {
+            id: 119,
+            name: "HELLO KITTY",
+            price: 5000,
+            img: "sanrio/hellokitty.png",
+            category: "Sanrio",
+            description: "STL Hello Kitty de Sanrio.",
+        },
+
+        {
+            id: 120,
+            name: "MY MELODY",
+            price: 5000,
+            img: "sanrio/melody.png",
+            category: "Sanrio",
+            description: "STL My Melody de Sanrio.",
+        },
+
+        {
+            id: 121,
+            name: "KUROMI",
+            price: 5000,
+            img: "sanrio/kuromi.png",
+            category: "Sanrio",
+            description: "STL Kuromi de Sanrio.",
+        },
+
+        {
+            id: 122,
+            name: "SET HEBILLAS SANRIO",
+            price: 5000,
+            images: [
+                "sanrio/kitty.png",
+                "sanrio/pompompurin.png",
+                "sanrio/kuromi2.png",
+                "sanrio/cinamorrol.png",
+                "sanrio/chococat.png",
+                ],
+            category: "Sanrio",
+            description: "STL Set Hebillas X5 Sanrio.",
+        },
+
+        {
+            id: 123,
+            name: "MUÑECA",
+            price: 5000,
+            img: "squidgame/muñeca.png",
+            category: "Squid Game",
+            description: "STL Muñeca de la serie Squid Game.",
+        },
+
+        {
+            id: 124,
+            name: "SOLDADOS",
+            price: 5000,
+            img: "squidgame/soldados.png",
+            category: "Squid Game",
+            description: "STL Soldados de la serie Squid Game.",
+        },
+
+        {
+            id: 125,
+            name: "LLAVERO MUÑECA",
+            price: 5000,
+            img: "squidgame/llavero.png",
+            category: "Squid Game",
+            description: "STL Llavero Muñeca de la serie Squid Game.",
+        },
+
+        {
+            id: 126,
+            name: "LLAVEROS SOLDADOS COMBO 1",
+            price: 5000,
+            img: "squidgame/combo1.png",
+            category: "Squid Game",
+            description: "STL Llaveros Soldados Combo 1 de la serie Squid Game.",
+        },
+
+        {
+            id: 127,
+            name: "PELO TOCINA",
+            price: 7000,
+            img: "roblox/tocina.png",
+            category: "Roblox",
+            description: "STL Pelo Tocina articulado del juego Roblox.",
+        },
+
+        {
+            id: 128,
+            name: "PELO TOCINO",
+            price: 7000,
+            img: "roblox/tocino.jpg",
+            category: "Roblox",
+            description: "STL Pelo Tocino articulado del juego Roblox.",
+        },
+
+        {
+            id: 129,
+            name: "CHUYMINE",
+            price: 7000,
+            img: "roblox/ajolote.jpg",
+            category: "Roblox",
+            description: "STL Chuymine Youtuber de Roblox articulado.",
+        },
+
+        {
+            id: 130,
+            name: "LLAVEROS MINI ROBLOX",
+            price: 10000,
+            img: "roblox/llaveros.png",
+            category: "Roblox",
+            description: "STL de Llaveros Mini de Roblox x5.",
+        },
+
+        {
+            id: 131,
+            name: "COMB0 1",
+            price: 7000,
+            img: "roblox/combo1.png",
+            category: "Roblox",
+            description: "STL Combo 1 articulado de Roblox.",
+        },
+
+        {
+            id: 132,
+            name: "COMBO 2",
+            price: 7000,
+            img: "roblox/combo2.png",
+            category: "Roblox",
+            description: "STL Combo 2 articulado de Roblox.",
+        },
+
+        {
+            id: 133,
+            name: "COMBO 3",
+            price: 7000,
+            img: "roblox/combo3.png",
+            category: "Roblox",
+            description: "STL Combo 3 articulado de Roblox.",
+        },
+
+        {
+            id: 134,
+            name: "COMBO 4",
+            price: 7000,
+            img: "roblox/combo4.png",
+            category: "Roblox",
+            description: "STL Combo 4 articulado de Roblox.",
+        },
+
+        {
+            id: 135,
+            name: "SKIBIDI TOILET",
+            price: 7000,
+            img: "skibidi/skibidi.jpg",
+            category: "Skibidi Toilet",
+            description: "STL Skibidi toilet con resorte en el cuello.",
+        },
+
+        {
+            id: 136,
+            name: "JEFE SKIBIDI",
+            price: 7000,
+            img: "skibidi/jefeskibidi.jpg",
+            category: "Skibidi Toilet",
+            description: "STL Jefe Skibidi toilet con resorte en el cuello.",
+        },
+
+        {
+            id: 137,
+            name: "SKIBIDI SAW",
+            price: 7000,
+            img: "skibidi/skibidisaw.jpg",
+            category: "Skibidi Toilet",
+            description: "STL Skibidi Saw de la animacion Skibidi Toilet.",
+        },
+
+        {
+            id: 138,
+            name: "SKIBIDI CARSAW",
+            price: 7000,
+            img: "skibidi/carsaw.jpg",
+            category: "Skibidi Toilet",
+            description: "STL Skibidi CarSaw de la animacion Skibidi Toilet.",
+        },
+
+        {
+            id: 139,
+            name: "SKIBIDI TITAN CIENTIFICO",
+            price: 7000,
+            img: "skibidi/cientifico.jpg",
+            category: "Skibidi Toilet",
+            description: "STL Skibidi Titan Cientifico de la animacion Skibidi Toilet.",
+        },
+
+        {
+            id: 140,
+            name: "SKIBIDI TITAN JEFE",
+            price: 7000,
+            img: "skibidi/titanjefe.jpg",
+            category: "Skibidi Toilet",
+            description: "STL Skibidi Titan Jefe de la animacion Skibidi Toilet.",
+        },
+
+        {
+            id: 141,
+            name: "SKIBIDI MAGNETO",
+            price: 7000,
+            img: "skibidi/magneto.jpg",
+            category: "Skibidi Toilet",
+            description: "STL Skibidi Magneto de la animacion Skibidi Toilet.",
+        },
+
+        {
+            id: 142,
+            name: "SKIBIDI SKULL",
+            price: 7000,
+            img: "skibidi/skull.jpg",
+            category: "Skibidi Toilet",
+            description: "STL Skibidi Skull de la animacion Skibidi Toilet.",
+        },
+
+        {
+            id: 143,
+            name: "SKIBIDI PARASITO",
+            price: 7000,
+            img: "skibidi/parasito.jpg",
+            category: "Skibidi Toilet",
+            description: "STL Skibidi Parasito de la animacion Skibidi Toilet.",
+        },
+
+        {
+            id: 144,
+            name: "MEGA TITAN GMAN",
+            price: 7000,
+            img: "skibidi/titangman.jpg",
+            category: "Skibidi Toilet",
+            description: "STL Mega Titan Gman de la animacion Skibidi Toilet.",
+        },
+
+        {
+            id: 145,
+            name: "SKIBIDI TITAN DJ",
+            price: 7000,
+            img: "skibidi/titandj.jpg",
+            category: "Skibidi Toilet",
+            description: "STL Skibidi Titan DJ de la animacion Skibidi Toilet.",
+        },
+
+        {
+            id: 146,
+            name: "SKIBIDI PAYASO",
+            price: 7000,
+            img: "skibidi/payaso.jpg",
+            category: "Skibidi Toilet",
+            description: "STL Skibidi Payaso de la animacion Skibidi Toilet.",
+        },
+
+        {
+            id: 147,
+            name: "SKIBIDI MICHAEL JACKSON",
+            price: 7000,
+            img: "skibidi/michael.jpg",
+            category: "Skibidi Toilet",
+            description: "STL Skibidi Michael Jackson de la animacion Skibidi Toilet.",
+        },
+
+        {
+            id: 148,
+            name: "ASTRO COMANDANTE",
+            price: 7000,
+            img: "skibidi/comandante.jpg",
+            category: "Skibidi Toilet",
+            description: "STL Astro Comandante de la animacion Skibidi Toilet.",
+        },
+
+        {
+            id: 149,
+            name: "MEGA ASTRO TOILET",
+            price: 7000,
+            img: "skibidi/megastro.jpg",
+            category: "Skibidi Toilet",
+            description: "STL Mega Astro Toilet de la animacion Skibidi Toilet.",
+        },
+
+        {
+            id: 150,
+            name: "ASTRO TOILET 2",
+            price: 7000,
+            img: "skibidi/astro2.jpg",
+            category: "Skibidi Toilet",
+            description: "STL Astro Toilet 2 de la animacion Skibidi Toilet.",
+        },
+
+        {
+            id: 151,
+            name: "ASTRO WOMAN",
+            price: 7000,
+            img: "skibidi/astrowoman.jpg",
+            category: "Skibidi Toilet",
+            description: "STL Astro Woman de la animacion Skibidi Toilet.",
+        },
+
+        {
+            id: 151,
+            name: "ASTRO DESTRUCTOR",
+            price: 7000,
+            img: "skibidi/destructor.jpg",
+            category: "Skibidi Toilet",
+            description: "STL Astro Destructor de la animacion Skibidi Toilet.",
+        },
+
+        {
+            id: 152,
+            name: "SPEAKERMAN COMUN LLAVERO",
+            price: 5000,
+            img: "skibidi/speakerman.png",
+            category: "Skibidi Toilet",
+            description: "STL Llavero Speakerman Comun de la animacion Skibidi Toilet.",
+        },
+
+        {
+            id: 153,
+            name: "SPEAKERMAN BLACK LLAVERO",
+            price: 5000,
+            img: "skibidi/speakerman2.jpg",
+            category: "Skibidi Toilet",
+            description: "STL Llavero Speakerman Black de la animacion Skibidi Toilet.",
+        },
+
+        {
+            id: 154,
+            name: "TITAN SPEAKERMAN LLAVERO",
+            price: 5000,
+            img: "skibidi/titanspeakerman.jpg",
+            category: "Skibidi Toilet",
+            description: "STL Llavero Titan Speakerman de la animacion Skibidi Toilet.",
+        },
+
+        {
+            id: 155,
+            name: "SPEAKERMAN LLAVERO",
+            price: 5000,
+            img: "skibidi/speakerman3.png",
+            category: "Skibidi Toilet",
+            description: "STL Llavero Speakerman de la animacion Skibidi Toilet.",
+        },
+
+        {
+            id: 156,
+            name: "TV MAN LLAVERO",
+            price: 5000,
+            img: "skibidi/tvman.png",
+            category: "Skibidi Toilet",
+            description: "STL Llavero TVman de la animacion Skibidi Toilet.",
+        },
+
+        {
+            id: 157,
+            name: "TV WOMAN LLAVERO",
+            price: 5000,
+            img: "skibidi/tvwoman.jpg",
+            category: "Skibidi Toilet",
+            description: "STL Llavero TV Woman de la animacion Skibidi Toilet.",
+        },
+
+        {
+            id: 158,
+            name: "TITAN TV MAN LLAVERO",
+            price: 5000,
+            img: "skibidi/titantvman.jpg",
+            category: "Skibidi Toilet",
+            description: "STL Llavero Titan TV Man de la animacion Skibidi Toilet.",
+        },
+
+        {
+            id: 159,
+            name: "CAMERAMAN LLAVERO",
+            price: 5000,
+            img: "skibidi/cameraman.png",
+            category: "Skibidi Toilet",
+            description: "STL Llavero Cameraman de la animacion Skibidi Toilet.",
+        },
+
+        {
+            id: 160,
+            name: "TITAN CAMERAMAN LLAVERO",
+            price: 5000,
+            img: "skibidi/titancameraman.jpg",
+            category: "Skibidi Toilet",
+            description: "STL Llavero Titan Cameraman de la animacion Skibidi Toilet.",
+        },
+
+        {
+            id: 161,
+            name: "MEGA GMAN LLAVERO",
+            price: 5000,
+            img: "skibidi/megagmanllavero.jpg",
+            category: "Skibidi Toilet",
+            description: "STL Llavero Mega Gman de la animacion Skibidi Toilet.",
+        },
+
+        {
+            id: 162,
+            name: "SKIBIDI JEFE LLAVERO",
+            price: 5000,
+            img: "skibidi/skibidijefellavero.jpg",
+            category: "Skibidi Toilet",
+            description: "STL Llavero Skibidi Jefe de la animacion Skibidi Toilet.",
+        },
+
+        {
+            id: 163,
+            name: "TITAN TALADRO LLAVERO",
+            price: 5000,
+            img: "skibidi/taladrollavero.jpg",
+            category: "Skibidi Toilet",
+            description: "STL Llavero Titan Taladro de la animacion Skibidi Toilet.",
+        },
+
+        {
+            id: 164,
+            name: "TITAN CIENTIFICO LLAVERO",
+            price: 5000,
+            img: "skibidi/cientificollavero.jpg",
+            category: "Skibidi Toilet",
+            description: "STL Llavero Titan Cientifico de la animacion Skibidi Toilet.",
+        },
+
+        {
+            id: 165,
+            name: "AUTO SPEAKERMAN",
+            price: 7000,
+            img: "skibidi/autospeakerman.jpg",
+            category: "Skibidi Toilet",
+            description: "STL Auto Speakerman de la animacion Skibidi Toilet.",
+        },
+
+        {
+            id: 166,
+            name: "AUTO CAMERAMAN",
+            price: 7000,
+            img: "skibidi/autocameraman.jpg",
+            category: "Skibidi Toilet",
+            description: "STL Auto Cameraman de la animacion Skibidi Toilet.",
+        },
+
+        {
+            id: 167,
+            name: "CAMERAMAN DESTAPACAÑOS",
+            price: 7000,
+            img: "skibidi/destapacanos.jpg",
+            category: "Skibidi Toilet",
+            description: "STL Cameraman Destapacaños de la animacion Skibidi Toilet.",
+        },
+
+        {
+            id: 168,
+            name: "CAMERAMAN ANDROIDE",
+            price: 7000,
+            img: "skibidi/androide.jpg",
+            category: "Skibidi Toilet",
+            description: "STL Cameraman Androide de la animacion Skibidi Toilet.",
+        },
+
+        {
+            id: 169,
+            name: "PENCILMAN",
+            price: 7000,
+            img: "skibidi/pencilman.jpg",
+            category: "Skibidi Toilet",
+            description: "STL Pencilman de la animacion Skibidi Toilet.",
+        },
+       
+        {
+            id: 170,
+            name: "TITAN SPEAKERMAN",
+            price: 10000,
+            img: "skibidi/megatitanspeakermanflexy.jpg",
+            category: "Skibidi Toilet",
+            description: "STL Mega Titan Speakerman de la animacion Skibidi Toilet.",
+        },
+
+        {
+            id: 171,
+            name: "TITAN CAMERAMAN",
+            price: 10000,
+            img: "skibidi/megatitancameramanflexy.jpg",
+            category: "Skibidi Toilet",
+            description: "STL Mega Titan Cameraman de la animacion Skibidi Toilet.",
+        },
+
+        {
+            id: 172,
+            name: "SPEAKERMAN GUITAR HERO",
+            price: 10000,
+            img: "skibidi/guitarhero.jpg",
+            category: "Skibidi Toilet",
+            description: "STL Speakerman Guitar Hero de la animacion Skibidi Toilet.",
+        },
+
+        {
+            id: 173,
+            name: "TITAN CLOCKMAN",
+            price: 10000,
+            img: "skibidi/titanclockmanflexy.jpg",
+            category: "Skibidi Toilet",
+            description: "STL Titan Clockman de la animacion Skibidi Toilet.",
+        },
+
+        {
+            id: 174,
+            name: "CAMERAMAN LARGE",
+            price: 7000,
+            img: "skibidi/large.jpg",
+            category: "Skibidi Toilet",
+            description: "STL Cameraman Large de la animacion Skibidi Toilet.",
+        },
+
+        {
+            id: 175,
+            name: "DRILLMAN",
+            price: 7000,
+            img: "skibidi/drillmanflexy.jpg",
+            category: "Skibidi Toilet",
+            description: "STL Drillman de la animacion Skibidi Toilet.",
+        },
+
+        {
+            id: 176,
+            name: "TITAN DRILLMAN DRAGON",
+            price: 7000,
+            img: "skibidi/titandrillman.jpg",
+            category: "Skibidi Toilet",
+            description: "STL Titan Drillman Dragon de la animacion Skibidi Toilet.",
+        },
+
+        {
+            id: 177,
+            name: "DRILLMAN NINJA",
+            price: 7000,
+            img: "skibidi/drillmaninja.jpg",
+            category: "Skibidi Toilet",
+            description: "STL Drillman Ninja de la animacion Skibidi Toilet.",
+        },
+
+        {
+            id: 178,
+            name: "MEGA TITAN TALADRO",
+            price: 10000,
+            img: "skibidi/titantaladro.jpg",
+            category: "Skibidi Toilet",
+            description: "STL Mega Titan Taladro de la animacion Skibidi Toilet.",
+        },
+
+        {
+            id: 179,
+            name: "CLOCKMAN ALARMA",
+            price: 7000,
+            img: "skibidi/clockman.jpg",
+            category: "Skibidi Toilet",
+            description: "STL Clockman Alarma de la animacion Skibidi Toilet.",
+        },
+
+        {
+            id: 180,
+            name: "CLOCKMAN ELITE",
+            price: 7000,
+            img: "skibidi/clockmanelite.jpg",
+            category: "Skibidi Toilet",
+            description: "STL Clockman Elite de la animacion Skibidi Toilet.",
+        },
+
+        {
+            id: 181,
+            name: "CLOCKMAN",
+            price: 7000,
+            img: "skibidi/clockmanflexy.jpg",
+            category: "Skibidi Toilet",
+            description: "STL Clockman de la animacion Skibidi Toilet.",
+        },
+
+        {
+            id: 182,
+            name: "CAMERAMAN SOPAPAS",
+            price: 7000,
+            img: "skibidi/sopapa.jpg",
+            category: "Skibidi Toilet",
+            description: "STL Cameraman Sopapas de la animacion Skibidi Toilet.",
+        },
+
+        {
+            id: 183,
+            name: "SPEAKERMAN COMUN",
+            price: 7000,
+            img: "skibidi/speakermanflexy.jpg",
+            category: "Skibidi Toilet",
+            description: "STL Speakerman Comun de la animacion Skibidi Toilet.",
+        },
+
+        {
+            id: 184,
+            name: "TITAN SPEAKERMAN",
+            price: 7000,
+            img: "skibidi/speakermanflexy2.png",
+            category: "Skibidi Toilet",
+            description: "STL Titan Speakerman de la animacion Skibidi Toilet.",
+        },
+
+        {
+            id: 185,
+            name: "TV WOMAN",
+            price: 7000,
+            img: "skibidi/tvwomanflexy.jpg",
+            category: "Skibidi Toilet",
+            description: "STL TV Woman de la animacion Skibidi Toilet.",
+        },
+
+        {
+            id: 186,
+            name: "TV MAN",
+            price: 7000,
+            img: "skibidi/tvmanflexy.png",
+            category: "Skibidi Toilet",
+            description: "STL TV Man de la animacion Skibidi Toilet.",
+        },
+
+        {
+            id: 187,
+            name: "DRILL WOMAN",
+            price: 7000,
+            img: "skibidi/drillwoman.jpg",
+            category: "Skibidi Toilet",
+            description: "STL Drill Woman de la animacion Skibidi Toilet.",
+        },
+
+        {
+            id: 188,
+            name: "SPEAKERMAN",
+            price: 7000,
+            img: "skibidi/speakermanblanco.jpg",
+            category: "Skibidi Toilet",
+            description: "STL Speakerman de la animacion Skibidi Toilet.",
+        },
+
+        {
+            id: 189,
+            name: "DA FUQ BOOM",
+            price: 7000,
+            img: "skibidi/dafuq.jpg",
+            category: "Skibidi Toilet",
+            description: "STL Da Fuq Boom creador de la animacion Skibidi Toilet.",
+        },
+
+        {
+            id: 190,
+            name: "SKIBIDI SAW",
+            price: 7000,
+            img: "skibidi/saw.jpg",
+            category: "Skibidi Toilet",
+            description: "STL Skibidi Saw de la animacion Skibidi Toilet.",
+        },
+
+        {
+            id: 191,
+            name: "MEGA TITAN CAMERAMAN",
+            price: 10000,
+            img: "skibidi/megatitanblanco.jpg",
+            category: "Skibidi Toilet",
+            description: "STL Mega Titan Cameraman de la animacion Skibidi Toilet.",
+        },
+
+        {
+            id: 192,
+            name: "MEGA TITAN SPEAKERMAN",
+            price: 10000,
+            img: "skibidi/titanblanco.jpg",
+            category: "Skibidi Toilet",
+            description: "STL Mega Titan Speakerman de la animacion Skibidi Toilet.",
+        },
+
+        {
+            id: 193,
+            name: "MEGA TITAN CLOCKMAN",
+            price: 10000,
+            img: "skibidi/clockmanblanco.jpg",
+            category: "Skibidi Toilet",
+            description: "STL Mega Titan Clockman de la animacion Skibidi Toilet.",
+        },
+
+        {
+            id: 194,
+            name: "MEGA TITAN TALADRO",
+            price: 10000,
+            img: "skibidi/drill.jpg",
+            category: "Skibidi Toilet",
+            description: "STL Mega Titan Taladro de la animacion Skibidi Toilet.",
+        },
+
+        {
+            id: 195,
+            name: "CAMERAMAN CIENTIFICO",
+            price: 7000,
+            img: "skibidi/cientificoblanco.jpg",
+            category: "Skibidi Toilet",
+            description: "STL Cameraman Cientifico de la animacion Skibidi Toilet.",
+        },
+
+        {
+            id: 196,
+            name: "MEGA TITAN TVMAN",
+            price: 10000,
+            img: "skibidi/megatvman.jpg",
+            category: "Skibidi Toilet",
+            description: "STL Mega Titan TvMan de la animacion Skibidi Toilet.",
+        },
+
+        {
+            id: 197,
+            name: "SPEAKER WOMAN",
+            price: 7000,
+            img: "skibidi/speakerwomanblanco.jpg",
+            category: "Skibidi Toilet",
+            description: "STL Speaker Woman de la animacion Skibidi Toilet.",
+        },
+
+        {
+            id: 198,
+            name: "SPEAKER MAN BLACK",
+            price: 7000,
+            img: "skibidi/speakermanblack.jpg",
+            category: "Skibidi Toilet",
+            description: "STL Speaker Man Black de la animacion Skibidi Toilet.",
+        },
+
+        {
+            id: 199,
+            name: "CAMERA WOMAN",
+            price: 7000,
+            img: "skibidi/camerawoman.jpg",
+            category: "Skibidi Toilet",
+            description: "STL Camera Woman de la animacion Skibidi Toilet.",
+        },
+
+        {
+            id: 200,
+            name: "MEGA TITAN TVMAN",
+            price: 10000,
+            img: "skibidi/tvmanblanco.jpg",
+            category: "Skibidi Toilet",
+            description: "STL Mega Titan Tv Man de la animacion Skibidi Toilet.",
+        },
+
+        {
+            id: 201,
+            name: "TITAN TVMAN",
+            price: 7000,
+            img: "skibidi/titantvblanco.jpg",
+            category: "Skibidi Toilet",
+            description: "STL Titan Tv Man de la animacion Skibidi Toilet.",
+        },
+
+        {
+            id: 202,
+            name: "TITAN CIENTIFICO",
+            price: 7000,
+            img: "skibidi/cientificoblanco.jpg",
+            category: "Skibidi Toilet",
+            description: "STL Titan Cientifico de la animacion Skibidi Toilet.",
+        },
+
+        {
+            id: 203,
+            name: "SKIBIDI HIBRIDO",
+            price: 7000,
+            img: "skibidi/hibridoblanco.jpg",
+            category: "Skibidi Toilet",
+            description: "STL Skibidi Hibrido de la animacion Skibidi Toilet.",
+        },
+
+        {
+            id: 204,
+            name: "TRITITAN",
+            price: 7000,
+            img: "skibidi/trititan.jpg",
+            category: "Skibidi Toilet",
+            description: "STL Trititan de la animacion Skibidi Toilet.",
+        },
+
+        {
+            id: 205,
+            name: "MEGA TITAN CAMERAMAN CIERRA",
+            price: 10000,
+            img: "skibidi/cierra.jpg",
+            category: "Skibidi Toilet",
+            description: "STL Mega Titan Cameraman Cierra de la animacion Skibidi Toilet.",
+        },
+
+        {
+            id: 206,
+            name: "PLAYER",
+            price: 7000,
+            img: "poppyplaytime/player.png",
+            category: "Poppy Playtime",
+            description: "STL Player del juego Poppy Playtime.",
+        },
+
+        {
+            id: 207,
+            name: "HUGGY WUGGY",
+            price: 7000,
+            img: "poppyplaytime/huggy.jpg",
+            category: "Poppy Playtime",
+            description: "STL Huggy Wuggy del juego Poppy Playtime.",
+        },
+
+        {
+            id: 208,
+            name: "HUGGY WUGGY 2",
+            price: 7000,
+            img: "poppyplaytime/huggy2.png",
+            category: "Poppy Playtime",
+            description: "STL Huggy Wuggy del juego Poppy Playtime.",
+        },
+
+        {
+            id: 209,
+            name: "KISSI MISSI",
+            price: 7000,
+            img: "poppyplaytime/kissi.png",
+            category: "Poppy Playtime",
+            description: "STL Kissi Missi del juego Poppy Playtime.",
+        },
+
+        {
+            id: 210,
+            name: "POPPY",
+            price: 7000,
+            img: "poppyplaytime/poppy.jpg",
+            category: "Poppy Playtime",
+            description: "STL Poppy del juego Poppy Playtime.",
+        },
+
+        {
+            id: 211,
+            name: "KILLY WILLY",
+            price: 7000,
+            img: "poppyplaytime/killy.jpg",
+            category: "Poppy Playtime",
+            description: "STL Killy Willy del juego Poppy Playtime.",
+        },
+
+        {
+            id: 212,
+            name: "PIANOSAURIO",
+            price: 7000,
+            img: "poppyplaytime/pianosaurio.png",
+            category: "Poppy Playtime",
+            description: "STL Pianosaurio del juego Poppy Playtime.",
+        },
+
+        {
+            id: 213,
+            name: "MISS DELIGHT",
+            price: 7000,
+            img: "poppyplaytime/miss.jpg",
+            category: "Poppy Playtime",
+            description: "STL Miss Delight del juego Poppy Playtime.",
+        },
+
+        {
+            id: 214,
+            name: "DUEY",
+            price: 7000,
+            img: "poppyplaytime/duey.png",
+            category: "Poppy Playtime",
+            description: "STL Duey del juego Poppy Playtime.",
+        },
+
+        {
+            id: 215,
+            name: "CATNAP",
+            price: 7000,
+            img: "poppyplaytime/catnap.png",
+            category: "Poppy Playtime",
+            description: "STL Catnap del juego Poppy Playtime.",
+        },
+
+        {
+            id: 216,
+            name: "CATNAP 2",
+            price: 7000,
+            img: "poppyplaytime/catnap2.png",
+            category: "Poppy Playtime",
+            description: "STL Catnap 2 del juego Poppy Playtime.",
+        },
+
+        {
+            id: 217,
+            name: "DOGDAY",
+            price: 7000,
+            img: "poppyplaytime/dogday.png",
+            category: "Poppy Playtime",
+            description: "STL Dogday del juego Poppy Playtime.",
+        },
+
+        {
+            id: 218,
+            name: "DOGDAY 2",
+            price: 7000,
+            img: "poppyplaytime/dogday2.jpg",
+            category: "Poppy Playtime",
+            description: "STL Dogday 2 del juego Poppy Playtime.",
+        },
+
+        {
+            id: 219,
+            name: "DOGDAY 3",
+            price: 7000,
+            img: "poppyplaytime/dogday3.png",
+            category: "Poppy Playtime",
+            description: "STL Dogday 3 del juego Poppy Playtime.",
+        },
+
+        {
+            id: 220,
+            name: "BOBBY BEARHUG",
+            price: 7000,
+            img: "poppyplaytime/bear.png",
+            category: "Poppy Playtime",
+            description: "STL Bobby Bearhug del juego Poppy Playtime.",
+        },
+
+        {
+            id: 221,
+            name: "HOPPY HOPSCOTCH",
+            price: 7000,
+            img: "poppyplaytime/hop.png",
+            category: "Poppy Playtime",
+            description: "STL Hoppy Hopscotch del juego Poppy Playtime.",
+        },
+
+        {
+            id: 222,
+            name: "PICKI PIGGY",
+            price: 7000,
+            img: "poppyplaytime/piggy.jpg",
+            category: "Poppy Playtime",
+            description: "STL Picki Piggy del juego Poppy Playtime.",
+        },
+
+        {
+            id: 223,
+            name: "BUBBA BUBBAPHANT",
+            price: 7000,
+            img: "poppyplaytime/phant.png",
+            category: "Poppy Playtime",
+            description: "STL Bubba Bubbaphant del juego Poppy Playtime.",
+        },
+
+        {
+            id: 224,
+            name: "KICKINCHIKEN",
+            price: 7000,
+            img: "poppyplaytime/chiken.png",
+            category: "Poppy Playtime",
+            description: "STL KickinChiken del juego Poppy Playtime.",
+        },
+
+        {
+            id: 225,
+            name: "CRAFTY CORN",
+            price: 7000,
+            img: "poppyplaytime/corn.png",
+            category: "Poppy Playtime",
+            description: "STL Crafty Corn del juego Poppy Playtime.",
+        },
+
+        {
+            id: 226,
+            name: "BABA CHOPS",
+            price: 7000,
+            img: "poppyplaytime/baba.png",
+            category: "Poppy Playtime",
+            description: "STL Baba Chops del juego Poppy Playtime.",
+        },
+
+        {
+            id: 227,
+            name: "ALLISTER GATOR",
+            price: 7000,
+            img: "poppyplaytime/gator.png",
+            category: "Poppy Playtime",
+            description: "STL Allister Gator del juego Poppy Playtime.",
+        },
+
+        {
+            id: 228,
+            name: "BULL BULLYNO",
+            price: 7000,
+            img: "poppyplaytime/bull.png",
+            category: "Poppy Playtime",
+            description: "STL Bull Bullyno del juego Poppy Playtime.",
+        },
+
+        {
+            id: 229,
+            name: "RABIE BABY",
+            price: 7000,
+            img: "poppyplaytime/baby.png",
+            category: "Poppy Playtime",
+            description: "STL Rabie Baby del juego Poppy Playtime.",
+        },
+
+        {
+            id: 230,
+            name: "ICKY LICKY",
+            price: 7000,
+            img: "poppyplaytime/licky.png",
+            category: "Poppy Playtime",
+            description: "STL Icky Licky del juego Poppy Playtime.",
+        },
+        
+        {
+            id: 231,
+            name: "SIMIN SMIKE",
+            price: 7000,
+            img: "poppyplaytime/smike.png",
+            category: "Poppy Playtime",
+            description: "STL Simin Smike del juego Poppy Playtime.",
+        },
+
+        {
+            id: 232,
+            name: "MAGGIE MAKO",
+            price: 7000,
+            img: "poppyplaytime/mako.png",
+            category: "Poppy Playtime",
+            description: "STL Maggie Mako del juego Poppy Playtime.",
+        },
+
+        {
+            id: 233,
+            name: "POEY",
+            price: 7000,
+            img: "poppyplaytime/poey.png",
+            category: "Poppy Playtime",
+            description: "STL Poey del juego Poppy Playtime.",
+        },
+
+        {
+            id: 234,
+            name: "TOUILLE",
+            price: 7000,
+            img: "poppyplaytime/touille.png",
+            category: "Poppy Playtime",
+            description: "STL Touille del juego Poppy Playtime.",
+        },
+
+        {
+            id: 235,
+            name: "CATNAP LLAVERO",
+            price: 5000,
+            img: "poppyplaytime/llavero1.png",
+            category: "Poppy Playtime",
+            description: "STL Llavero articulado de Catnap del juego Poppy Playtime.",
+        },
+
+        {
+            id: 236,
+            name: "HOPPY HOPSCOTCH LLAVERO",
+            price: 5000,
+            img: "poppyplaytime/llavero2.png",
+            category: "Poppy Playtime",
+            description: "STL Llavero articulado de Hoppy Hopscotch del juego Poppy Playtime.",
+        },
+
+        {
+            id: 237,
+            name: "BOBBY BEARHUG LLAVERO",
+            price: 5000,
+            img: "poppyplaytime/llavero3.png",
+            category: "Poppy Playtime",
+            description: "STL Llavero articulado de Bobby Bearhug del juego Poppy Playtime.",
+        },
+
+        {
+            id: 238,
+            name: "CRAFTY CORN LLAVERO",
+            price: 5000,
+            img: "poppyplaytime/llavero4.png",
+            category: "Poppy Playtime",
+            description: "STL Llavero articulado de Crafty Corn del juego Poppy Playtime.",
+        },
+
+        {
+            id: 239,
+            name: "DOGDAY LLAVERO",
+            price: 5000,
+            img: "poppyplaytime/llavero5.png",
+            category: "Poppy Playtime",
+            description: "STL Llavero articulado de Dogday del juego Poppy Playtime.",
+        },
+
+        {
+            id: 240,
+            name: "PICKI PIGGY LLAVERO",
+            price: 5000,
+            img: "poppyplaytime/llavero6.png",
+            category: "Poppy Playtime",
+            description: "STL Llavero articulado de Picki Piggy del juego Poppy Playtime.",
+        },
+
+        {
+            id: 241,
+            name: "KICKINCHICKEN LLAVERO",
+            price: 5000,
+            img: "poppyplaytime/llavero7.png",
+            category: "Poppy Playtime",
+            description: "STL Llavero articulado de KickinChicken del juego Poppy Playtime.",
+        },
+
+        {
+            id: 242,
+            name: "SET LLAVEROS PLANOS X8",
+            price: 7000,
+            img: "poppyplaytime/planos.jpg",
+            category: "Poppy Playtime",
+            description: "STL Llavero Planos del juego Poppy Playtime.",
+        },
+
+        {
+            id: 243,
+            name: "DIJES X8",
+            price: 7000,
+            img: "poppyplaytime/dijes8.png",
+            category: "Poppy Playtime",
+            description: "STL llaveros dijes de los personajes del juego Poppy Playtime.",
+        },
+
+        {
+            id: 244,
+            name: "UNO 1",
+            price: 5000,
+            img: "numberblocks/uno.png",
+            category: "Number Blocks",
+            description: "STL UNO de Number Blocks",
+        },
+
+        {
+            id: 245,
+            name: "DOS 2",
+            price: 5000,
+            img: "numberblocks/dos.png",
+            category: "Number Blocks",
+            description: "STL DOS de Number Blocks",
+        },
+
+        {
+            id: 246,
+            name: "TRES 3",
+            price: 5000,
+            img: "numberblocks/tres.png",
+            category: "Number Blocks",
+            description: "STL TRES de Number Blocks",
+        },
+
+        {
+            id: 247,
+            name: "CUATRO 4",
+            price: 5000,
+            img: "numberblocks/cuatro.png",
+            category: "Number Blocks",
+            description: "STL CUATRO de Number Blocks",
+        },
+
+        {
+            id: 248,
+            name: "CINCO 5",
+            price: 5000,
+            img: "numberblocks/cinco.png",
+            category: "Number Blocks",
+            description: "STL CINCO de Number Blocks",
+        },
+
+        {
+            id: 249,
+            name: "TRALALERO TRALALA",
+            price: 5000,
+            img: "brainrot/tralalero.png",
+            category: "Italian Brainrot",
+            description: "STL Tralalero Tralala de Italian Brainrot",
+        },
+
+        {
+            id: 250,
+            name: "TUNG TUNG SAHUR",
+            price: 5000,
+            img: "brainrot/tungtung.png",
+            category: "Italian Brainrot",
+            description: "STL Tung Tung Sahur de Italian Brainrot",
+        },
+
+        {
+            id: 251,
+            name: "LIRILI LARILA",
+            price: 5000,
+            img: "brainrot/lirili.png",
+            category: "Italian Brainrot",
+            description: "STL Lirili Larila de Italian Brainrot",
+        },
+
+        {
+            id: 252,
+            name: "BR BR PATAPIM",
+            price: 5000,
+            img: "brainrot/patapim.png",
+            category: "Italian Brainrot",
+            description: "STL Br Br Patapim de Italian Brainrot",
+        },
+
+        {
+            id: 253,
+            name: "CAPUCCINO ASASINO",
+            price: 5000,
+            img: "brainrot/capuccino.png",
+            category: "Italian Brainrot",
+            description: "STL Capuccino Asasino de Italian Brainrot",
+        },
+
+        {
+            id: 254,
+            name: "BOMBARDILO CROCODRILO",
+            price: 5000,
+            img: "brainrot/bombardilo.png",
+            category: "Italian Brainrot",
+            description: "STL Bombardilo Crocodrilo de Italian Brainrot",
+        },
+
+        {
+            id: 255,
+            name: "BALLERINA CAPUCCINA",
+            price: 5000,
+            img: "brainrot/capuccina.png",
+            category: "Italian Brainrot",
+            description: "STL Ballerina Capuccina de Italian Brainrot",
+        },
+
+        {
+            id: 256,
+            name: "VACA SATURNO SATURNITA",
+            price: 5000,
+            img: "brainrot/saturnita.png",
+            category: "Italian Brainrot",
+            description: "STL Vaca Saturno Saturnita de Italian Brainrot",
+        },
+
+        {
+            id: 257,
+            name: "BURBALONI LULILOLI",
+            price: 5000,
+            img: "brainrot/burbaloni.png",
+            category: "Italian Brainrot",
+            description: "STL Burbaloni Luliloli de Italian Brainrot",
+        },
+
+        {
+            id: 258,
+            name: "BOMBINI GUSINI",
+            price: 5000,
+            img: "brainrot/bombini.png",
+            category: "Italian Brainrot",
+            description: "STL Bombini Gusini de Italian Brainrot",
+        },
+
+        {
+            id: 259,
+            name: "FRIOCAMELLO",
+            price: 5000,
+            img: "brainrot/friocamello.png",
+            category: "Italian Brainrot",
+            description: "STL FrioCamello de Italian Brainrot",
+        },
+
+        {
+            id: 260,
+            name: "BONECA AMBALABU",
+            price: 5000,
+            img: "brainrot/ambalabu.png",
+            category: "Italian Brainrot",
+            description: "STL Boneca Ambalabu de Italian Brainrot",
+        },
+
+        {
+            id: 261,
+            name: "MATEO",
+            price: 5000,
+            img: "brainrot/mateo.png",
+            category: "Italian Brainrot",
+            description: "STL Mateo de Italian Brainrot",
+        },
+
+        {
+            id: 262,
+            name: "AGARRINI LAPALINI",
+            price: 5000,
+            img: "brainrot/agarrini.png",
+            category: "Italian Brainrot",
+            description: "STL Agarrini Lapalini de Italian Brainrot",
+        },
+
+        {
+            id: 263,
+            name: "CHIMPANCINI BANANINI",
+            price: 5000,
+            img: "brainrot/chimpancini.png",
+            category: "Italian Brainrot",
+            description: "STL Chimpancini Bananini de Italian Brainrot",
+        },
+
+        {
+            id: 264,
+            name: "TRIPI TROPA TROPA TRIPA",
+            price: 5000,
+            img: "brainrot/tripi.png",
+            category: "Italian Brainrot",
+            description: "STL Tripi Tropa Tropa Tripa de Italian Brainrot",
+        },
+
+        {
+            id: 265,
+            name: "UDIN DIN DIN DUN",
+            price: 5000,
+            img: "brainrot/udin.png",
+            category: "Italian Brainrot",
+            description: "STL Udin Din Din Dun de Italian Brainrot",
+        },
+
+        {
+            id: 266,
+            name: "BOBRITO BANDITO",
+            price: 5000,
+            img: "brainrot/bobrito.png",
+            category: "Italian Brainrot",
+            description: "STL Bobrito Bandito de Italian Brainrot",
+        },
+
+        {
+            id: 267,
+            name: "TRULIMERO TRULICHINA",
+            price: 5000,
+            img: "brainrot/trulimero.png",
+            category: "Italian Brainrot",
+            description: "STL Trulimero Trulichina de Italian Brainrot",
+        },
+
+        {
+            id: 268,
+            name: "TATATA SAHUR",
+            price: 5000,
+            img: "brainrot/tatata.png",
+            category: "Italian Brainrot",
+            description: "STL Tatata Sahur de Italian Brainrot",
+        },
+
+        {
+            id: 269,
+            name: "GIRAFA CELESTE",
+            price: 5000,
+            img: "brainrot/girafa.png",
+            category: "Italian Brainrot",
+            description: "STL Girafa Celeste de Italian Brainrot",
+        },
+
+        {
+            id: 270,
+            name: "LA ESOK SIKOLA",
+            price: 5000,
+            img: "brainrot/sikola.png",
+            category: "Italian Brainrot",
+            description: "STL La Esok Sikola de Italian Brainrot",
+        },
+
+        {
+            id: 271,
+            name: "BLUBERRINI OCTOPUCINI",
+            price: 5000,
+            img: "brainrot/octopucini.png",
+            category: "Italian Brainrot",
+            description: "STL Bluberrini Octopucini de Italian Brainrot",
+        },
+
+        {
+            id: 272,
+            name: "RINO TOSTERINO",
+            price: 5000,
+            img: "brainrot/tosterino.png",
+            category: "Italian Brainrot",
+            description: "STL Rino Tosterino de Italian Brainrot",
+        },
+
+        {
+            id: 273,
+            name: "NUCLEARO DINOSAURIO",
+            price: 5000,
+            img: "brainrot/dinosaurio.png",
+            category: "Italian Brainrot",
+            description: "STL Nuclearo Dinosaurio de Italian Brainrot",
+        },
+
+        {
+            id: 274,
+            name: "DRAGON CANELONI",
+            price: 5000,
+            img: "brainrot/caneloni.png",
+            category: "Italian Brainrot",
+            description: "STL Dragon Caneloni de Italian Brainrot",
+        },
+
+        {
+            id: 275,
+            name: "KEPAT KUPAT",
+            price: 5000,
+            img: "brainrot/kepat.png",
+            category: "Italian Brainrot",
+            description: "STL Kepat Kupat de Italian Brainrot",
+        },
+
+        {
+            id: 276,
+            name: "TUNG TUNG SAHUR HALLOWEEN",
+            price: 5000,
+            img: "brainrot/haloween.png",
+            category: "Italian Brainrot",
+            description: "STL Tung Tung Sahur Halloween de Italian Brainrot",
+        },
+
+        {
+            id: 277,
+            name: "TRIPI TROPA BB",
+            price: 5000,
+            img: "brainrot/tripabb.png",
+            category: "Italian Brainrot",
+            description: "STL Tripi Tropa BB de Italian Brainrot",
+        },
+
+        {
+            id: 278,
+            name: "VACA SATURNA BB",
+            price: 5000,
+            img: "brainrot/vacabb.png",
+            category: "Italian Brainrot",
+            description: "STL Vaca Saturna BB de Italian Brainrot",
+        },
+
+        {
+            id: 279,
+            name: "MATEO BB",
+            price: 5000,
+            img: "brainrot/mateobb.png",
+            category: "Italian Brainrot",
+            description: "STL Mateo BB de Italian Brainrot",
+        },
+
+        {
+            id: 280,
+            name: "ORCALERITO BB",
+            price: 5000,
+            img: "brainrot/orcaleritobb.png",
+            category: "Italian Brainrot",
+            description: "STL Orcalerto BB de Italian Brainrot",
+        },
+
+        {
+            id: 281,
+            name: "FRUTODRILLO BB",
+            price: 5000,
+            img: "brainrot/frutodrilobb.png",
+            category: "Italian Brainrot",
+            description: "STL Frutodrillo BB de Italian Brainrot",
+        },
+
+        {
+            id: 282,
+            name: "TRALALERITOS BB X2",
+            price: 5000,
+            img: "brainrot/tralaleritobb.png",
+            category: "Italian Brainrot",
+            description: "STL Tralalerito y Tralalerita BB de Italian Brainrot",
+        },
+
+        {
+            id: 283,
+            name: "LIRILI LARILA BB",
+            price: 5000,
+            img: "brainrot/lirilibb.png",
+            category: "Italian Brainrot",
+            description: "STL Lirili Larila BB de Italian Brainrot",
+        },
+
+        {
+            id: 284,
+            name: "CAPUCCINO BB",
+            price: 5000,
+            img: "brainrot/capuchinobb.png",
+            category: "Italian Brainrot",
+            description: "STL Capuccino BB de Italian Brainrot",
+        },
+
+        {
+            id: 285,
+            name: "BONECA BB",
+            price: 5000,
+            img: "brainrot/bonecabb.png",
+            category: "Italian Brainrot",
+            description: "STL Boneca BB de Italian Brainrot",
+        },
+
+        {
+            id: 286,
+            name: "BALLERINA BB",
+            price: 5000,
+            img: "brainrot/ballerinabb.png",
+            category: "Italian Brainrot",
+            description: "STL Ballerina BB de Italian Brainrot",
+        },
+
+        {
+            id: 287,
+            name: "FRIGOCAMELITO BB",
+            price: 5000,
+            img: "brainrot/frigocamelitobb.png",
+            category: "Italian Brainrot",
+            description: "STL Frigocamelito BB de Italian Brainrot",
+        },
+
+        {
+            id: 288,
+            name: "COCOSINI BB",
+            price: 5000,
+            img: "brainrot/cocosinibb.png",
+            category: "Italian Brainrot",
+            description: "STL Cocosini BB de Italian Brainrot",
+        },
+
+        {
+            id: 289,
+            name: "BR BR PATAPIM BB",
+            price: 5000,
+            img: "brainrot/patapimbb.png",
+            category: "Italian Brainrot",
+            description: "STL Br Br Patapim BB de Italian Brainrot",
+        },
+
+        {
+            id: 290,
+            name: "TUNG TUNG SAHUR BB",
+            price: 5000,
+            img: "brainrot/sahurbb.png",
+            category: "Italian Brainrot",
+            description: "STL Tung Tung Sahur BB de Italian Brainrot",
+        },
+
+        {
+            id: 291,
+            name: "CHIMPANCINI BB",
+            price: 5000,
+            img: "brainrot/chimpancinibb.png",
+            category: "Italian Brainrot",
+            description: "STL Chimpancini BB de Italian Brainrot",
+        },
+
+        {
+            id: 292,
+            name: "BOMBARDILO BB",
+            price: 5000,
+            img: "brainrot/bombardilobb.png",
+            category: "Italian Brainrot",
+            description: "STL Bombardilo BB de Italian Brainrot",
+        },
+
+        {
+            id: 293,
+            name: "UDIN DIN DIN DUN BB",
+            price: 5000,
+            img: "brainrot/udinbb.png",
+            category: "Italian Brainrot",
+            description: "STL Udin Din DIn Dun BB de Italian Brainrot",
+        },
+
+        {
+            id: 294,
+            name: "MINIS MUÑECO Y LLAVERO - AMS",
+            price: 10000,
+            img: "brainrot/ams.png",
+            category: "Italian Brainrot",
+            description: "STL Minis Muñeco y Llavero para imprimir en AMS de Italian Brainrot",
+        },
+
+        {
+            id: 295,
+            name: "FASE 1 X22",
+            price: 40000,
+            img: "sprunki/fase1.jpg",
+            category: "Sprunki",
+            description: "STL Fase 1 de los Sprunki, consultar por venta individual.",
+        },
+
+        {
+            id: 296,
+            name: "FASE 2 X20",
+            price: 40000,
+            img: "sprunki/fase2.jpg",
+            category: "Sprunki",
+            description: "STL Fase 2 de los Sprunki, consultar por venta individual.",
+        },
+
+        {
+            id: 297,
+            name: "FASE 3 X20",
+            price: 50000,
+            img: "sprunki/fase3.jpg",
+            category: "Sprunki",
+            description: "STL Fase 3 de los Sprunki, consultar por venta individual.",
+        },
+
+        {
+            id: 298,
+            name: "COMBO HARRY POTTER",
+            price: 21000,
+            img:"harrypotter/combo1.jpg",
+            category: "Harry Potter",
+            description: "STL Harry Potter, Hermione & Ron con base y extras.",
+        },
+
+        {
+            id: 299,
+            name: "HARRY POTTER",
+            price: 8000,
+            img:"harrypotter/harry.jpg",
+            category: "Harry Potter",
+            description: "STL Harry Potter con base y extras.",
+        },
+
+        {
+            id: 300,
+            name: "HERMIONE GRANGER",
+            price: 8000,
+            img:"harrypotter/hermione.jpg",
+            category: "Harry Potter",
+            description: "STL Hermione Granger con base y extras.",
+        },
+
+        {
+            id: 301,
+            name: "RON WEASLEY",
+            price: 8000,
+            img:"harrypotter/ron.jpg",
+            category: "Harry Potter",
+            description: "STL Ron Weasley con base y extras.",
+        },
+
+        {
+            id: 302,
+            name: "GORILA TITAN TEMPLE",
+            price: 9000,
+            img:"robaunhuevo/gorila.jpg",
+            category: "Roba un huevo",
+            description: "STL de Gorila del juego Roba un huevo de Roblox.",
+        },
+
+        {
+            id: 303,
+            name: "BTS COMBO",
+            price: 40000,
+            img:"bts/bts.jpg",
+            category: "BTS",
+            description: "STL de BTS grupo de KPOP con llaveros logo.",
+        },
+
+        {
+            id: 304,
+            name: "RM BTS",
+            price: 8000,
+            img:"bts/rm.jpg",
+            category: "BTS",
+            description: "STL RM de BTS grupo de KPOP con llavero logo.",
+        },
+
+        {
+            id: 305,
+            name: "JIN BTS",
+            price: 8000,
+            img:"bts/jin.jpg",
+            category: "BTS",
+            description: "STL JIN BTS grupo de KPOP con llavero logo.",
+        },
+
+        {
+            id: 306,
+            name: "SUGA BTS",
+            price: 8000,
+            img:"bts/suga.jpg",
+            category: "BTS",
+            description: "STL SUGA BTS grupo de KPOP con llavero logo.",
+        },
+
+        {
+            id: 307,
+            name: "J-HOPE BTS",
+            price: 8000,
+            img:"bts/hope.jpg",
+            category: "BTS",
+            description: "STL J-HOPE de BTS grupo de KPOP con llavero logo.",
+        },
+
+        {
+            id: 308,
+            name: "JIMIN BTS",
+            price: 8000,
+            img:"bts/jimin.jpg",
+            category: "BTS",
+            description: "STL JIMIN de BTS grupo de KPOP con llavero logo.",
+        },
+
+
+        {
+            id: 309,
+            name: "V BTS",
+            price: 8000,
+            img:"bts/v.jpg",
+            category: "BTS",
+            description: "STL V de BTS grupo de KPOP con llavero logo.",
+        },
+
+        {
+            id: 310,
+            name: "JUNGKOOK BTS",
+            price: 8000,
+            img:"bts/kook.jpg",
+            category: "BTS",
+            description: "STL JUNGKOOK de BTS grupo de KPOP con llavero logo.",
+        },
+
+        {
+            id: 311,
+            name: "HUGGY WUGGY",
+            price: 6000,
+            img:"poppyplaytime/hugy.jpg",
+            category: "Poppy Playtime",
+            description: "STL Huggy Wuggy del juego Poppy Playtime.",
+        },
+
+        {
+            id: 312,
+            name: "KISSY MISSY",
+            price: 6000,
+            img:"poppyplaytime/kissy.jpg",
+            category: "Poppy Playtime",
+            description: "STL Kissy Missy del juego Poppy Playtime.",
+        },
+
+        {
+            id: 313,
+            name: "CRISTIANO RONALDO",
+            price: 10000,
+            img:"mundial/ronaldo.jpg",
+            category: "Mundial",
+            description: "STL Cristiano Ronaldo de Portugal articulado.",
+        },
+
+        {
+            id: 314,
+            name: "JULIAN ALVAREZ",
+            price: 10000,
+            img:"mundial/alvarez.jpg",
+            category: "Mundial",
+            description: "STL Julian Alvarez de Argentina articulado.",
+        },
+
+        {
+            id: 315,
+            name: "DIBU MARTINEZ",
+            price: 10000,
+            img:"mundial/dibu.jpg",
+            category: "Mundial",
+            description: "STL Dibu Martinez de Argentina articulado.",
+        },
+
+        {
+            id: 316,
+            name: "BUZZ LIGHTYEAR",
+            price: 10000,
+            img:"toystory/buzz.jpg",
+            category: "Toy Story",
+            description: "STL Buzz Lightyear articulado de la pelicula Toy Story.",
+        },
+
+        {
+            id: 317,
+            name: "TIRO AL BLANCO",
+            price: 10000,
+            img:"toystory/tiroalblanco.jpg",
+            category: "Toy Story",
+            description: "STL Tiro al Blanco articulado de la pelicula Toy Story.",
+        },
+
+        {
+            id: 318,
+            name: "JESSY",
+            price: 10000,
+            img:"toystory/jessy.jpg",
+            category: "Toy Story",
+            description: "STL Jessy articulado de la pelicula Toy Story.",
+        },
+
+        {
+            id: 319,
+            name: "YOSHI",
+            price: 8000,
+            img:"mariobros/joshy.jpg",
+            category: "Mario Bross",
+            description: "STL Yoshi articulado del juego MarioBross.",
+        },
+
+        {
+            id: 320,
+            name: "MARIO Y LUIGI",
+            price: 12000,
+            img:"mariobros/marioluigi.jpg",
+            category: "Mario Bross",
+            description: "STL Mario y Luigi articulados + llaveros del juego MarioBross.",
+        },
+
+        {
+            id: 321,
+            name: "TOAD Y PEACH",
+            price: 12000,
+            img:"mariobros/peach.jpg",
+            category: "Mario Bross",
+            description: "STL Toad y Peach articulados del juego MarioBross.",
+        },
+
+        {
+            id: 322,
+            name: "LUFFY - FRUTA GOMU GOMU",
+            price: 10000,
+            img:"onepiece/luffy.jpg",
+            category: "One Piece",
+            description: "STL Luffy articulado + llavero Fruta Gomu Gomu del anime One Piece.",
+        },
+
+        {
+            id: 323,
+            name: "ZORO",
+            price: 10000,
+            img:"onepiece/zoro.jpg",
+            category: "One Piece",
+            description: "STL Zoro articulado del anime One Piece.",
+        },
+
+        {
+            id: 324,
+            name: "CHOPPER",
+            price: 10000,
+            img:"onepiece/choper.jpg",
+            category: "One Piece",
+            description: "STL Chopper articulado del anime One Piece.",
+        },
+
+        {
+            id: 325,
+            name: "RATTHEW",
+            price: 7000,
+            img:"animalhospital/ratew.jpg",
+            category: "Animal Hospital",
+            description: "STL Ratthew articulado del juego Animal Hospital roblox.",
+        },
+
+        {
+            id: 326,
+            name: "ANOMALY",
+            price: 7000,
+            img:"animalhospital/malo.jpg",
+            category: "Animal Hospital",
+            description: "STL Ratthew articulado del juego Animal Hospital roblox.",
+        },
+
+        {
+            id: 327,
+            name: "COMBO DRAGON BALL",
+            price: 21000,
+            img:"dragonball/combo.jpg",
+            category: "Dragon Ball",
+            description: "STL Combo Goku - Ultra Instinto - Super Saiyajin articulado con base del anime Dragon Ball.",
+        },
+
+        {
+            id: 328,
+            name: "GOKU",
+            price: 8000,
+            img:"dragonball/goku.jpg",
+            category: "Dragon Ball",
+            description: "STL Goku articulado con base del anime Dragon Ball.",
+        },
+
+        {
+            id: 329,
+            name: "GOKU ULTRA INSTINTO",
+            price: 8000,
+            img:"dragonball/goku2.jpg",
+            category: "Dragon Ball",
+            description: "STL Goku Ultra Instinto articulado con base del anime Dragon Ball.",
+        },
+
+        {
+            id: 330,
+            name: "GOKU SUPER SAIYAJIN",
+            price: 8000,
+            img:"dragonball/goku3.jpg",
+            category: "Dragon Ball",
+            description: "STL Goku Super Saiyajin articulado con base del anime Dragon Ball.",
+        },
+
+        {
+            id: 331,
+            name: "SPIDERMAN",
+            price: 8000,
+            img:"superheroes/spiderman.jpg",
+            category: "SuperHeroes",
+            description: "STL Spiderman muñeco y llavero.",
+        },
+
+        {
+            id: 332,
+            name: "COMBO LEYENDAS",
+            price: 15000,
+            img:"mundial/combo.jpg",
+            category: "Mundial",
+            description: "STL llaveros de Messi, Cristiano Ronaldo, Mbappe, Haaland, Neymar y Lamine Yamal.",
+        },
+
+        {
+            id: 333,
+            name: "CIRUJANO",
+            price: 7000,
+            img:"animalhospital/cirujano.jpg",
+            category: "Animal Hospital",
+            description: "STL Cirujano articulado del juego Animal Hospital roblox.",
+        },
+
+        {
+            id: 334,
+            name: "INTERNO",
+            price: 7000,
+            img:"animalhospital/interno.jpg",
+            category: "Animal Hospital",
+            description: "STL Interno articulado del juego Animal Hospital roblox.",
+        },
+
+        {
+            id: 335,
+            name: "CAMISETA SELECCION ARGENTINA",
+            price: 10000,
+            img:"mundial/remera.jpg",
+            category: "Mundial",
+            description: "STL Camiseta de la Seleccion Argentina con soporte.",
+        },
+
+        {
+            id: 336,
+            name: "COMBO HALLOWEEN",
+            price: 30000,
+            images: [
+                "halloween/combo.webp",
+                "halloween/combo1.webp",
+                "halloween/combo2.webp",
+                ],
+            category: "Halloween",
+            description:
+                "STL Muñeco + llavero + ataud\n" +
+                "Impreso por piezas o 3MF\n" +
+                "|Zombie - Esqueleto - Hombre lobo - Dracula - Frankenstein - Momia|",
+        },
+
+        {
+            id: 337,
+            name: "DRACULA",
+            price: 7000,
+            images: [
+                "halloween/dracula.webp",
+                "halloween/dracula2.webp",
+                ],
+            category: "Halloween",
+            description:
+                "STL Dracula Muñeco + llavero + ataud\n" +
+                "Impreso por piezas o 3MF",
+        },
+
+        {
+            id: 338,
+            name: "ZOMBIE",
+            price: 7000,
+            images: [
+                "halloween/zombie.webp",
+                "halloween/zombie2.webp",
+                ],
+            category: "Halloween",
+            description:
+                "STL Zombie Muñeco + llavero + ataud\n" +
+                "Impreso por piezas o 3MF",
+        },
+
+        {
+            id: 339,
+            name: "ESQUELETO",
+            price: 7000,
+            images: [
+                "halloween/esqueleto.webp",
+                "halloween/esqueleto2.webp",
+                ],
+            category: "Halloween",
+            description:
+                "STL Esqueleto Muñeco + llavero + ataud\n" +
+                "Impreso por piezas o 3MF",
+        },
+
+        {
+            id: 340,
+            name: "FRANKENSTEIN",
+            price: 7000,
+            images: [
+                "halloween/frankie.webp",
+                "halloween/frankie2.webp",
+                ],
+            category: "Halloween",
+            description:
+                "STL Frankenstein Muñeco + llavero + ataud\n" +
+                "Impreso por piezas o 3MF",
+        },
+
+        {
+            id: 341,
+            name: "HOMBRE LOBO",
+            price: 7000,
+            img: "halloween/lobo.webp",
+            category: "Halloween",
+            description:
+                "STL Hombre Lobo Muñeco + llavero + ataud\n" +
+                "Impreso por piezas o 3MF",
+        },
+
+        {
+            id: 342,
+            name: "MOMIA",
+            price: 7000,
+            img: "halloween/momia.webp",
+            category: "Halloween",
+            description:
+                "STL Momia Muñeco + llavero + ataud\n" +
+                "Impreso por piezas o 3MF",
+        },
+
+        {
+            id: 343,
+            name: "GODZILLA",
+            price: 3000,
+            img: "godzilla/godzilla.webp",
+            category: "Godzilla",
+            description:
+                "STL Godzilla Muñeco + llavero.",
+        },
+
+        {
+            id: 344,
+            name: "KINGKONG",
+            price: 3000,
+            img: "godzilla/kingkong.webp",
+            category: "King Kong",
+            description:
+                "STL King Kong Muñeco + llavero",
+        },
+
+        {
+            id: 345,
+            name: "CHICAS SUPERPODEROSAS",
+            price: 20000,
+            img: "chicasuperpoderosas/chicas.webp",
+            category: "Chicas SuperPoderosas",
+            description:
+                "STL Chicas SuperPoderosas Bombon, Burbuja y Bellota + base\n"+
+                "Por piezas o 3MF"
+        },
+
+        {
+            id: 346,
+            name: "BOMBON",
+            price: 8000,
+            img: "chicasuperpoderosas/bombom.webp",
+            category: "Chicas SuperPoderosas",
+            description:
+                "STL Bombon + base\n"+
+                "Por piezas o 3MF"
+        },
+
+        {
+            id: 347,
+            name: "BELLOTA",
+            price: 8000,
+            img: "chicasuperpoderosas/bellota.webp",
+            category: "Chicas SuperPoderosas",
+            description:
+                "STL Bellota + base\n"+
+                "Por piezas o 3MF"
+        },
+
+        {
+            id: 348,
+            name: "BURBUJA",
+            price: 8000,
+            img: "chicasuperpoderosas/burbuja.webp",
+            category: "Chicas SuperPoderosas",
+            description:
+                "STL Burbuja + base\n"+
+                "Por piezas o 3MF"
+        },
+
+        {
+            id: 349,
+            name: "SIREN HEAD MOM",
+            price: 7000,
+            img: "sirenhead/sirenhead.webp",
+            category: "Siren Head",
+            description: "STL Siren Head Mom por partes articulado",
+        },
+
+        {
+            id: 350,
+            name: "PAYASO PLIM PLIM",
+            price: 10000,
+            img: "plimplim/plimplim.webp",
+            category: "Plim Plim",
+            description: "STL Plim Plim articulado\n"+ 
+            "Por partes y 3MF",
+        },
+
+        {
+            id: 351,
+            name: "CERDITO HOGGIE",
+            price: 8000,
+            img: "plimplim/cerdito.webp",
+            category: "Plim Plim",
+            description: "STL Cerdito Hoogie articulado\n"+ 
+            "Por partes y 3MF",
+        },
+
+        {
+            id: 352,
+            name: "OSO BAM",
+            price: 8000,
+            img: "plimplim/osito.jpg",
+            category: "Plim Plim",
+            description: "STL Oso Bam articulado\n"+ 
+            "Por partes y 3MF",
+        },
+
+        {
+            id: 353,
+            name: "HE-MAN",
+            price: 8000,
+            img: "heman/heman.webp",
+            category: "He-Man",
+            description: "STL He-Man articulado, por partes.",
+        },
+
+        {
+            id: 354,
+            name: "SKELETOR",
+            price: 8000,
+            img: "heman/skeletor.webp",
+            category: "He-Man",
+            description: "STL Skeletor articulado, por partes.",
+        },
+
+        {
+            id: 355,
+            name: "CAROLINE",
+            price: 7000,
+            img: "caroline/caroline.webp",
+            category: "Caroline",
+            description: "STL Caroline articulado, por partes.",
+        },
+
+        {
+            id: 356,
+            name: "CHIMUELO",
+            price: 8000,
+            img: "chimuelo/chimuelo.webp",
+            category: "Entrenando a tu Dragon",
+            description: "STL Chimuelo + llavero articulado, por partes.",
+        },
+
+        {
+            id: 357,
+            name: "FURIA LUMINOSA",
+            price: 8000,
+            img: "chimuelo/furia.webp",
+            category: "Entrenando a tu Dragon",
+            description: "STL Furia Luminosa + llavero articulado, por partes.",
+        },
+
+        {
+            id: 358,
+            name: "LABUBU",
+            price: 8000,
+            img: "labubu/labubu.webp",
+            category: "Labubu",
+            description: "STL Labubu + llavero articulado, por partes.",
+        },
+
+        {
+            id: 359,
+            name: "STITCH",
+            price: 8000,
+            img: "stich/stich.jpg",
+            category: "Stitch",
+            description: "STL Stitch + llavero articulado, por partes.",
+        },
+
+        {
+            id: 360,
+            name: "ANGELA",
+            price: 8000,
+            img: "stich/angela.webp",
+            category: "Stitch",
+            description: "STL Angela + llavero articulado, por partes.",
+        },
+
+        {
+            id: 361,
+            name: "STITCH LABUBU",
+            price: 8000,
+            img: "stich/stich2.webp",
+            category: "Stitch",
+            description: "STL Stitch Labubu articulado, por partes.",
+        },
+
+        {
+            id: 362,
+            name: "GATITA MEI-LI",
+            price: 8000,
+            img: "plimplim/gata.webp",
+            category: "Plim Plim",
+            description: "STL Gatita Mei-Li articulado\n"+ 
+            "Por partes y 3MF",
+        }
+
+
+    ];
+
+
+    /* =====================================================
+       CARRITO
+    ===================================================== */
+
+    let cart = [];
+
+
+    /* =====================================================
+       CATEGORÍA SELECCIONADA
+    ===================================================== */
+
+    let selectedCategory = "Inicio";
+
+
+    /* =====================================================
+       MOSTRAR CATEGORÍAS
+    ===================================================== */
+    function toggleCategories() {
+
+        const categories =
+            document.getElementById("categories");
+
+        categories.classList.toggle("show");
+
+}
+
+    function renderCategories() {
+
+        const container =
+            document.getElementById("categories");
+
+        const categories = [
+            "Inicio",
+            ...new Set(
+                products.map(
+                    product => product.category
+                )
+            )
+        ];
+
+        container.innerHTML = categories.map(category => `
+
+            <button
+                class="category-btn ${
+                    category === selectedCategory
+                        ? "active"
+                        : ""
+                }"
+                onclick="selectCategory('${category}')"
+                type="button"
+            >
+                ${category}
+            </button>
+
+        `).join("");
+
+    }
+
+
+    /* =====================================================
+       SELECCIONAR CATEGORÍA
+    ===================================================== */
+
+    function selectCategory(category) {
+
+    selectedCategory = category;
+
+    renderCategories();
+
+    filterProducts();
+
+    // Cerrar el menú
+    document
+        .getElementById("categories")
+        .classList.remove("show");
+
+}
+
+
+    /* =====================================================
+       MOSTRAR PRODUCTOS
+    ===================================================== */
+
+    function renderProducts(list = products) {
+
+        const container =
+            document.getElementById("products-list");
+
+        if (list.length === 0) {
+            container.innerHTML = `
+                <div class="no-results">
+                    No se encontraron productos.
+                </div>
+            `;
+
+            return;
+        }
+
+        container.innerHTML = list.map(product => `
+
+            <div
+                class="card"
+                onclick="openProduct(${product.id})"
+            >
+
+                <div>
+
+                    <img
+                        src="${product.images ? product.images[0] : product.img}"
+                        alt="${product.name}"
+                    >
+
+                    <h3>
+                        ${product.name}
+                    </h3>
+
+                   
+                <div class="price">
+                    ${
+                        product.originalPrice
+                        ? `<span class="original-price">
+                            $${product.originalPrice.toLocaleString("es-AR")}
+                        </span>`
+                        : ""
+                    }
+
+                    <span class="current-price">
+                        $${product.price.toLocaleString("es-AR")}
+                    </span>
+                </div>
+
+
+                </div>
+
+                <button
+                    onclick="
+                        event.stopPropagation();
+                        addToCart(${product.id});
+                    "
+                    type="button"
+                >
+                    Agregar al Pedido
+                </button>
+
+            </div>
+
+        `).join("");
+    }
+
+
+    /* =====================================================
+       BUSCADOR + CATEGORÍAS
+    ===================================================== */
+
+    function filterProducts() {
+
+        const search = document
+            .getElementById("search")
+            .value
+            .toLowerCase()
+            .trim();
+
+
+        const filtered = products.filter(product => {
+
+            const name =
+                (product.name || "").toLowerCase();
+
+            const category =
+                (product.category || "").toLowerCase();
+
+
+            const matchesSearch =
+                name.includes(search) ||
+                category.includes(search);
+
+
+            const matchesCategory =
+                selectedCategory === "Inicio" ||
+                product.category === selectedCategory;
+
+
+            return matchesSearch && matchesCategory;
+
+        });
+
+
+        // Si no estamos buscando y estamos en "Inicio",
+        // mostrar solamente los últimos 4 productos.
+
+        if (
+            search === "" &&
+            selectedCategory === "Inicio"
+        ) {
+
+            renderProducts(
+                products.slice(-4).reverse()
+            );
+
+        } else {
+
+            // Si busca o selecciona una categoría,
+            // mostrar todos los resultados.
+
+            renderProducts(filtered);
+
+        }
+
+    }
+
+
+    /* =====================================================
+       ABRIR PRODUCTO
+    ===================================================== */
+
+    let currentProduct = null;
+    let currentImageIndex = 0;
+
+
+    function openProduct(productId) {
+
+    const product = products.find(
+        p => p.id === productId
+    );
+
+    if (!product) return;
+
+
+    currentProduct = product;
+    currentImageIndex = 0;
+
+
+    // Obtener las imágenes del producto
+
+    const images = product.images
+        ? product.images
+        : [product.img];
+
+
+    // Mostrar primera imagen
+
+    document.getElementById(
+        "modal-image"
+    ).src = images[currentImageIndex];
+
+
+    document.getElementById(
+        "modal-image"
+    ).alt = product.name;
+
+
+    // Nombre
+
+    document.getElementById(
+        "modal-name"
+    ).innerText = product.name;
+
+
+    // Precio
+
+    
+    const modalPrice = document.getElementById("modal-price");
+
+    modalPrice.innerHTML = product.originalPrice
+        ? `<span class="original-price">$${product.originalPrice.toLocaleString("es-AR")}</span>
+        <span class="current-price">$${product.price.toLocaleString("es-AR")}</span>`
+        : `$${product.price.toLocaleString("es-AR")}`;
+
+
+
+    // Descripción
+
+    document.getElementById(
+        "modal-description"
+    ).innerText =
+        product.description;
+
+
+    // Contador de imágenes
+
+    document.getElementById(
+        "image-counter"
+    ).innerText =
+        `${currentImageIndex + 1} / ${images.length}`;
+
+
+    // Mostrar u ocultar botones
+
+    const buttons =
+        document.querySelectorAll(".gallery-btn");
+
+
+    if (images.length <= 1) {
+
+        buttons.forEach(
+            button => button.style.display = "none"
+        );
+
+    } else {
+
+        buttons.forEach(
+            button => button.style.display = "block"
+        );
+
+    }
+
+
+    // Botón agregar al carrito
+
+    document.getElementById(
+        "modal-add-button"
+    ).onclick = function() {
+
+        addToCart(product.id);
+
+        closeModal();
+
+    };
+
+
+    // Abrir modal
+
+    document.getElementById(
+        "product-modal"
+    ).style.display = "flex";
+
+}
+
+function showImage() {
+
+    if (!currentProduct) return;
+
+    const images = currentProduct.images
+        ? currentProduct.images
+        : [currentProduct.img];
+
+    document.getElementById("modal-image").src =
+        images[currentImageIndex];
+
+    document.getElementById("modal-image").alt =
+        currentProduct.name;
+
+    document.getElementById("image-counter").innerText =
+        `${currentImageIndex + 1} / ${images.length}`;
+}
+
+
+function nextImage() {
+
+    if (!currentProduct) return;
+
+    const images = currentProduct.images
+        ? currentProduct.images
+        : [currentProduct.img];
+
+    currentImageIndex++;
+
+    if (currentImageIndex >= images.length) {
+        currentImageIndex = 0;
+    }
+
+    showImage();
+}
+
+
+function previousImage() {
+
+    if (!currentProduct) return;
+
+    const images = currentProduct.images
+        ? currentProduct.images
+        : [currentProduct.img];
+
+    currentImageIndex--;
+
+    if (currentImageIndex < 0) {
+        currentImageIndex = images.length - 1;
+    }
+
+    showImage();
+}
+
+
+
+    /* =====================================================
+       CERRAR MODAL
+    ===================================================== */
+
+    function closeModal() {
+
+        document.getElementById("product-modal").style.display =
+            "none";
+
+    }
+
+
+    function closeModalOutside(event) {
+
+        if (
+            event.target ===
+            document.getElementById("product-modal")
+        ) {
+
+            closeModal();
+
+        }
+
+    }
+
+
+    /* =====================================================
+       ESC PARA CERRAR
+    ===================================================== */
+
+    document.addEventListener(
+        "keydown",
+        function(event) {
+
+            if (event.key === "Escape") {
+
+                closeModal();
+
+                closeMobileCart();
+
+            }
+
+        }
+    );
+
+
+    /* =====================================================
+       AGREGAR AL CARRITO
+    ===================================================== */
+
+    function addToCart(productId) {
+
+        const product = products.find(
+            p => p.id === productId
+        );
+
+        if (!product) return;
+
+        // Verificar si ya está en el carrito
+        const existing = cart.find(
+            item => item.id === productId
+        );
+
+        if (existing) {
+            alert("Este producto ya está en tu pedido.");
+            return;
+        }
+
+        // Agregar solamente 1 unidad
+        cart.push({
+            ...product,
+            quantity: 1
+        });
+
+        updateCart();
+    }
+
+
+    /* =====================================================
+       CAMBIAR CANTIDAD
+    ===================================================== */
+
+    function changeQuantity(productId, amount) {
+
+        const item =
+            cart.find(
+                product =>
+                    product.id === productId
+            );
+
+
+        if (!item) return;
+
+
+        item.quantity += amount;
+
+
+        if (item.quantity <= 0) {
+
+            cart =
+                cart.filter(
+                    product =>
+                        product.id !== productId
+                );
+
+        }
+
+
+        updateCart();
+
+    }
+
+
+    /* =====================================================
+       ELIMINAR PRODUCTO
+    ===================================================== */
+
+    function removeFromCart(productId) {
+
+        cart =
+            cart.filter(
+                item =>
+                    item.id !== productId
+            );
+
+
+        updateCart();
+
+    }
+
+
+    /* =====================================================
+       CARRITO COMPUTADORA
+    ===================================================== */
+
+    function updateDesktopCart() {
+
+        const container =
+            document.getElementById("cart-items");
+
+        const totalEl =
+            document.getElementById("cart-total");
+
+
+        if (cart.length === 0) {
+
+            container.innerHTML = `
+                <p style="color:#888; margin-top:10px;">
+                    El carrito está vacío.
+                </p>
+            `;
+
+            totalEl.innerText = "Total: $0";
+
+            return;
+        }
+
+
+        let total = 0;
+
+
+        container.innerHTML = cart.map(item => {
+
+            const itemTotal =
+                item.price * item.quantity;
+
+
+            total += itemTotal;
+
+
+            return `
+
+                <div class="cart-item">
+
+                    <div class="cart-info">
+
+                        <div class="cart-name">
+                            ${item.name}
+                        </div>
+
+                    </div>
+
+
+                <div class="quantity-controls">
+
+                    <button
+                        class="delete-btn"
+                        onclick="removeFromCart(${item.id})"
+                        type="button"
+                    >
+                        <i class="fa-solid fa-trash"></i>
+                    </button>
+
+                </div>
+
+
+                    <strong>
+                        $${itemTotal.toLocaleString("es-AR")}
+                    </strong>
+
+                </div>
+
+            `;
+
+        }).join("");
+
+
+        totalEl.innerText =
+            `Total: $${total}`;
+
+    }
+
+
+    /* =====================================================
+       CARRITO CELULAR
+    ===================================================== */
+
+    function updateMobileCart() {
+
+        const container =
+            document.getElementById("mobile-cart-items");
+
+        const totalEl =
+            document.getElementById("mobile-cart-total");
+
+
+        if (!container || !totalEl) return;
+
+
+        if (cart.length === 0) {
+
+            container.innerHTML = `
+                <p style="color:#888; margin-top:10px;">
+                    El carrito está vacío.
+                </p>
+            `;
+
+            totalEl.innerText = "Total: $0";
+
+            return;
+        }
+
+
+        let total = 0;
+
+
+        container.innerHTML = cart.map(item => {
+
+            const itemTotal =
+                item.price * item.quantity;
+
+
+            total += itemTotal;
+
+
+            return `
+
+                <div class="cart-item">
+
+                    <div class="cart-info">
+
+                        <div class="cart-name">
+                            ${item.name}
+                        </div>
+
+                    </div>
+
+
+                    <div class="quantity-controls">
+
+                        <button
+                            onclick="changeQuantity(${item.id}, -1)"
+                            type="button"
+                        >
+                            −
+                        </button>
+
+                        <strong>
+                            1 unidad
+                        </strong>
+
+                        <button
+                                class="delete-btn"
+                                onclick="removeFromCart(${item.id})"
+                                type="button"
+                            >
+                               <i class="fa-solid fa-trash"></i> 
+                            </button>
+
+                        </div>
+
+                    </div>
+
+
+                    <strong>
+                        $${itemTotal}
+                    </strong>
+
+                </div>
+
+            `;
+
+        }).join("");
+
+
+        totalEl.innerText =
+            `Total: $${total}`;
+
+    }
+
+
+    /* =====================================================
+       ACTUALIZAR TODO EL CARRITO
+    ===================================================== */
+
+    function updateCart() {
+
+        const cartCount =
+            document.getElementById("cart-count");
+
+
+        if (cartCount) {
+
+            const quantity =
+                cart.reduce(
+                    (total, item) =>
+                        total + item.quantity,
+                    0
+                );
+
+
+            cartCount.innerText =
+                quantity;
+
+        }
+
+
+        updateDesktopCart();
+
+        updateMobileCart();
+
+    }
+
+
+    /* =====================================================
+       ABRIR CARRITO CELULAR
+    ===================================================== */
+
+    function openMobileCart() {
+
+        updateMobileCart();
+
+        document.getElementById(
+            "mobile-cart-modal"
+        ).style.display = "flex";
+
+    }
+
+
+    /* =====================================================
+       CERRAR CARRITO CELULAR
+    ===================================================== */
+
+    function closeMobileCart() {
+
+        document.getElementById(
+            "mobile-cart-modal"
+        ).style.display = "none";
+
+    }
+
+
+    /* =====================================================
+       CERRAR CARRITO AFUERA
+    ===================================================== */
+
+    function closeMobileCartOutside(event) {
+
+        if (
+            event.target ===
+            document.getElementById(
+                "mobile-cart-modal"
+            )
+        ) {
+
+            closeMobileCart();
+
+        }
+
+    }
+
+
+    /* =====================================================
+       ENVIAR WHATSAPP
+    ===================================================== */
+
+    function sendWhatsApp() {
+
+        if (cart.length === 0) {
+
+            alert(
+                "Por favor agregá al menos un producto al carrito."
+            );
+
+            return;
+
+        }
+
+
+        let name;
+
+        const mobileModal =
+            document.getElementById(
+                "mobile-cart-modal"
+            );
+
+
+        const mobileIsOpen =
+            mobileModal.style.display === "flex";
+
+
+        if (mobileIsOpen) {
+
+            name =
+                document
+                    .getElementById(
+                        "mobile-client-name"
+                    )
+                    .value
+                    .trim();
+         
+        } else {
+
+            name =
+                document
+                    .getElementById(
+                        "client-name"
+                    )
+                    .value
+                    .trim();
+
+        }
+
+
+        if (!name) {
+
+            alert(
+                "Por favor completá con tu nombre completo"
+            );
+
+            return;
+
+        }
+
+
+        let message =
+            `*NUEVO PEDIDO*\n`;
+
+
+        message +=
+            `\n*Nombre:* ${name}\n`;
+
+
+        message +=
+            `*Detalle del Pedido:*\n`;
+
+
+        let total = 0;
+
+
+        cart.forEach(item => {
+
+            const subtotal =
+                item.price * item.quantity;
+
+
+            total += subtotal;
+
+
+            message +=
+                `- ${item.name} x${item.quantity} ($${subtotal})\n`;
+
+        });
+
+
+        message +=
+            `\n💰 *Total a pagar:* $${total}`;
+
+
+        const encodedMessage =
+            encodeURIComponent(message);
+
+
+        window.open(
+        `https://wa.me/${PHONE_NUMBER}?text=${encodedMessage}`,
+        "_blank"
+        );
+
+    }
+
+     /* =====================================================
+       INICIAR CATÁLOGO
+    ===================================================== */
+
+        renderCategories();
+
+        renderProducts(products.slice(-4).reverse());
+
+        updateCart();
+
+</script>
+
+    <!-- =========================================================
+     PIE DE PÁGINA / CRÉDITOS
+    ========================================================= -->
+
+    <footer class="footer">
+
+    <div class="footer-content">
+
+        <div class="footer-info">
+
+            <h2>Qcosa3D</h2>
+
+            <p>
+                <i class="fa-solid fa-phone"></i>
+                Contacto: +54 9 379 415-6913
+            </p>
+
+            <p>
+                 <i class="fa-brands fa-instagram"></i> 
+                Instagram:
+                <a
+                    href="https://www.instagram.com/qcosa3d/"
+                    target="_blank"
+                >
+                    @qcosa3d
+                </a>
+            </p>
+
+        </div>
+
+        <div class="footer-credit">
+
+            <p>
+                Página creada por <strong>Agustina Miqueo</strong>
+            </p>
+
+            <p>
+                © 2026 Qcosa3D
+            </p>
+
+        </div>
+
+    </div>
+
+</footer>
+
+</body>
+
+</html>
